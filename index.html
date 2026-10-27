@@ -1,7 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#F2F2F7" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)"><meta name="color-scheme" content="light dark"><meta name="description" content="Guitar Lab: chord shapes, fills, harmonic map, mic chord jam, melody harmonizer, ear and rhythm training.">
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <title>Guitar Lab</title>
 <style>
 
@@ -849,9 +846,80 @@ body{-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;
 @media (max-width:900px){#lab .jamLayout{grid-template-columns:1fr}.jamStage{grid-template-columns:1fr}.jamArrowBig{transform:rotate(90deg);justify-self:center;line-height:1}}
 @media (max-width:480px){.jamBox{width:80px}.jamBig{font-size:42px}}
 .jamGripLab{display:block;font-size:10px;color:var(--ink-2);text-align:center;line-height:1.2;margin-top:2px}
+
+/* v18 lab helper */
+.glh-fab{position:fixed;right:max(16px,env(safe-area-inset-right));bottom:max(16px,env(safe-area-inset-bottom));z-index:9000;display:flex;align-items:center;gap:8px;height:52px;padding:0 18px 0 14px;border:0;border-radius:999px;background:var(--accent);color:var(--accent-ink);font:600 15px/1 var(--font);box-shadow:0 6px 20px rgba(0,0,0,.18),0 1px 3px rgba(0,0,0,.12);cursor:pointer;transition:transform .15s}
+.glh-fab:active{transform:scale(.96)}
+.glh-fab.on{background:var(--ink);color:var(--canvas)}
+.glh-fab svg{flex:none}
+.glh-panel{position:fixed;z-index:9001;right:max(16px,env(safe-area-inset-right));bottom:calc(max(16px,env(safe-area-inset-bottom)) + 64px);width:min(400px,calc(100vw - 32px));height:min(640px,calc(100vh - 110px));display:flex;flex-direction:column;background:var(--surface);color:var(--ink);border-radius:20px;box-shadow:0 18px 50px rgba(0,0,0,.22),0 0 0 .5px var(--hair);font:400 15px/1.45 var(--font);overflow:hidden;animation:glhIn .18s ease-out}
+.glh-panel[hidden]{display:none!important}
+@keyframes glhIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.glh-head{display:flex;align-items:center;gap:4px;padding:12px 10px 10px 16px;border-bottom:.5px solid var(--hair)}
+.glh-title{flex:1;display:flex;flex-direction:column;min-width:0}
+.glh-title b{font-size:17px;font-weight:700;letter-spacing:-.01em}
+.glh-title small{font-size:12px;color:var(--ink-2)}
+.glh-icon{width:36px;height:36px;border:0;border-radius:10px;background:transparent;color:var(--ink);font-size:17px;cursor:pointer}
+.glh-icon:hover{background:var(--seg-bg)}
+.glh-icon[aria-pressed="true"]{background:var(--accent-tint);color:var(--accent)}
+.glh-body{flex:1;overflow-y:auto;padding:14px 14px 6px;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+.glh-body[hidden],.glh-compose[hidden]{display:none!important}
+.glh-msgs{display:flex;flex-direction:column;gap:8px}
+.glh-msg{max-width:88%;padding:9px 13px;border-radius:18px;font-size:15px;line-height:1.45;overflow-wrap:anywhere}
+.glh-msg p{margin:0}.glh-msg p+p,.glh-msg ul+p,.glh-msg p+ul{margin-top:6px}
+.glh-msg ul{margin:2px 0;padding-left:18px}.glh-msg li{margin:2px 0}
+.glh-msg.me{align-self:flex-end;background:var(--accent);color:var(--accent-ink);border-bottom-right-radius:6px}
+.glh-msg.ai{align-self:flex-start;background:var(--fill,#F2F2F7);color:var(--ink);border-bottom-left-radius:6px}
+.glh-act{align-self:flex-start;font-size:12.5px;color:var(--ink-2);padding:0 6px}
+.glh-go{align-self:flex-start;border:0;border-radius:999px;padding:7px 13px;background:var(--accent-tint);color:var(--accent);font:600 13px var(--font);cursor:pointer}
+.glh-wait{display:flex;gap:4px;padding:13px 14px}
+.glh-wait i{width:7px;height:7px;border-radius:50%;background:var(--ink-3);animation:glhDot 1.2s infinite ease-in-out}
+.glh-wait i:nth-child(2){animation-delay:.15s}.glh-wait i:nth-child(3){animation-delay:.3s}
+@keyframes glhDot{0%,80%,100%{opacity:.25;transform:scale(.8)}40%{opacity:1;transform:scale(1)}}
+.glh-chips{display:flex;flex-wrap:wrap;gap:6px;padding:10px 0 4px}
+.glh-chip{border:0;border-radius:999px;padding:7px 12px;background:var(--seg-bg);color:var(--ink);font:500 13px var(--font);cursor:pointer;text-align:left}
+.glh-chip:hover{background:var(--accent-tint);color:var(--accent)}
+.glh-status{margin:0;padding:0 16px;font-size:12.5px;color:var(--ink-2);min-height:0}
+.glh-status:not(:empty){padding:6px 16px 0}
+.glh-compose{display:flex;align-items:flex-end;gap:8px;padding:10px 12px max(12px,env(safe-area-inset-bottom));border-top:.5px solid var(--hair)}
+.glh-compose textarea{flex:1;min-width:0;resize:none;max-height:120px;border:0;border-radius:18px;background:var(--fill,#F2F2F7);color:var(--ink);font:400 15px/1.35 var(--font);padding:9px 14px;outline:none}
+.glh-compose textarea:focus{box-shadow:0 0 0 2px var(--accent)}
+.glh-mic,.glh-send{flex:none;width:38px;height:38px;border:0;border-radius:50%;display:grid;place-items:center;cursor:pointer;font:700 18px var(--font);-webkit-user-select:none;user-select:none;touch-action:none}
+.glh-mic{background:var(--seg-bg);color:var(--ink)}
+.glh-mic.on{background:var(--bad);color:#fff;animation:glhPulse 1.1s ease-in-out infinite}
+@keyframes glhPulse{0%,100%{box-shadow:0 0 0 0 rgba(255,59,48,.45)}50%{box-shadow:0 0 0 7px rgba(255,59,48,0)}}
+.glh-send{background:var(--accent);color:var(--accent-ink)}
+.glh-settings{flex:1;overflow-y:auto;padding:14px 16px 16px;display:flex;flex-direction:column;gap:14px}
+.glh-settings[hidden]{display:none!important}
+.glh-group{background:var(--fill,#F2F2F7);border-radius:14px;padding:12px 14px;display:flex;flex-direction:column;gap:8px}
+.glh-group h4{margin:0;font-size:13px;font-weight:600;color:var(--ink-2)}
+.glh-sub{margin:4px 0 0;font-size:13px;font-weight:600;color:var(--ink-2)}
+.glh-row{display:flex;gap:8px;align-items:center}
+.glh-in{flex:1;min-width:0;height:40px;border:0;border-radius:10px;background:var(--surface);color:var(--ink);font:400 15px var(--font);padding:0 12px}
+.glh-ta{height:auto;padding:9px 12px;resize:vertical;line-height:1.45;font-size:14px}
+.glh-btn{height:38px;border:0;border-radius:10px;padding:0 14px;background:var(--accent-tint);color:var(--accent);font:600 14px var(--font);cursor:pointer;white-space:nowrap}
+.glh-btn.primary{background:var(--accent);color:var(--accent-ink)}
+.glh-btn.text{background:transparent;padding:0 4px;align-self:flex-start}
+.glh-btn:disabled{opacity:.4;cursor:default}
+.glh-done{align-self:stretch;height:44px}
+.glh-note{margin:0;font-size:12.5px;color:var(--ink-2);line-height:1.4}
+.glh-switch{display:flex;gap:10px;align-items:flex-start;font-size:14px}
+.glh-switch input{margin-top:3px;accent-color:var(--accent)}
+.glh-seg{display:flex;background:var(--seg-bg);border-radius:9px;padding:2px;gap:2px}
+.glh-seg button{flex:1;border:0;border-radius:7px;padding:7px 8px;background:transparent;color:var(--ink);font:600 13px var(--font);cursor:pointer}
+.glh-seg button[aria-pressed="true"]{background:var(--seg-thumb,#fff);box-shadow:var(--seg-shadow)}
+.glh-flash{animation:glhFlash 2.4s ease-out;outline:3px solid var(--accent)!important;outline-offset:3px!important;border-radius:10px}
+@keyframes glhFlash{0%,60%{outline-color:var(--accent)}100%{outline-color:transparent}}
+@media (max-width:600px){
+ .glh-panel{left:0;right:0;bottom:0;width:100%;height:min(86vh,calc(100dvh - 40px));border-radius:20px 20px 0 0}
+ .glh-fab{height:48px;padding:0 15px 0 12px}
+ .glh-fab.on{display:none}
+}
+@media (prefers-reduced-motion:reduce){.glh-panel,.glh-wait i,.glh-mic.on,.glh-flash{animation:none!important}}
+
+#lab{padding-bottom:84px}
 </style>
-</head>
-<body><div class="wrap" id="lab"><script>try{if((localStorage.getItem("guitarlab-view")||"simple")==="simple")document.getElementById("lab").classList.add("simple")}catch(e){document.getElementById("lab").classList.add("simple")}</script>
+<div class="wrap" id="lab"><script>try{if((localStorage.getItem("guitarlab-view")||"simple")==="simple")document.getElementById("lab").classList.add("simple")}catch(e){document.getElementById("lab").classList.add("simple")}</script>
 <header><div><div class="eyebrow">Practice workspace</div><h1>Guitar Lab<span style="color:var(--accent)">.</span></h1><p>Find the shape. Connect the chords. Hear the degrees.</p></div><div class="viewSwitch"><div class="segmented" role="group" aria-label="How much detail to show"><button type="button" data-view="simple" class="on" aria-pressed="true">Simple</button><button type="button" data-view="full" aria-pressed="false">Full detail</button></div><small id="viewNote" aria-live="polite"></small></div></header>
 <nav role="tablist" aria-label="Guitar Lab tools"><button role="tab" aria-selected="true" data-tab="overview">Home</button><div class="navGroup" role="presentation">Chord shapes</div><button role="tab" data-tab="explorer" aria-selected="false">Find chord shapes</button><button role="tab" data-tab="voicings" aria-selected="false">My chord library</button><div class="navGroup" role="presentation">Connect chords</div><button role="tab" data-tab="transLab" aria-selected="false">Fills between chords</button><button role="tab" data-tab="harmonic" aria-selected="false">What chord next?</button><button role="tab" data-tab="jam" aria-selected="false">Chord jam (mic)</button><div class="navGroup" role="presentation">Write</div><button role="tab" data-tab="harmonizer" aria-selected="false">Harmonize a melody</button><div class="navGroup" role="presentation">Train</div><button role="tab" data-tab="ear" aria-selected="false">Ear training</button><button role="tab" data-tab="rhythm" aria-selected="false">Rhythm &amp; singing</button></nav>
 <div class="tab active landingTab" id="overview" role="tabpanel" aria-label="Home">
@@ -2774,4 +2842,403 @@ init();
 window.GuitarLabJam={S,candidates,pick,classify,setCurrent,played,commit,inferKey,_mic:M};
 })();
 </script>
+<script>(()=>{'use strict';
+/* ===== Lab helper: an assistant on every page whose one job is this website =====
+   Brains, in order: Gemini (your free AI Studio key, same storage keys as Gooby
+   Goober so one key and one designed voice serve both on the same site), Claude
+   (inside the Claude app, where outside requests are blocked), then a built-in
+   guide that works offline. All three can operate the page: open tools, set
+   controls, press buttons, point at things. */
+const W=window,D=document;
+
+/* ===== Gemini: the free route (ported from Gooby Goober) ===== */
+const Gemini=(()=>{
+  const BASE='https://generativelanguage.googleapis.com/v1beta';
+  const KEY_STORE='gooby.gemini.key.v1',VOICE_STORE='gooby.gemini.voice.v1',SHAPE_STORE='gooby.gemini.ttsShape.v1';
+  const MODELS={chat:['gemini-3.8-flash','gemini-3.5-flash-lite'],tts:['gemini-3.8-flash-tts','gemini-3.8-flash-lite-tts']};
+  const DEFAULT_PROMPT='A young New Zealand woman in her early twenties with a natural, everyday Kiwi accent from Auckland. Bright, friendly and relaxed.';
+  const store={get(k){try{return localStorage.getItem(k)||''}catch(e){return ''}},set(k,v){try{if(v)localStorage.setItem(k,v);else localStorage.removeItem(k)}catch(e){}}};
+  const key=()=>store.get(KEY_STORE);
+  function setKey(k){store.set(KEY_STORE,String(k||'').trim())}
+  function voice(){try{return JSON.parse(store.get(VOICE_STORE)||'null')}catch(e){return null}}
+  function setVoice(v){store.set(VOICE_STORE,v?JSON.stringify(v):'')}
+  function errorFrom(status,body){const e=(body&&body.error)||{};const msg=e.message||('HTTP '+status);
+    if(status===429||e.status==='RESOURCE_EXHAUSTED')return{code:'rate_limited',message:msg,status};
+    if(status===401||status===403||/API key not valid|API_KEY_INVALID|PERMISSION_DENIED/i.test(msg))return{code:'bad_key',message:msg,status};
+    if(status===400)return{code:'invalid_request',message:msg,status};if(status===404)return{code:'not_found',message:msg,status};
+    return{code:'upstream_error',message:msg,status}}
+  async function call(path,body,{signal,method='POST'}={}){const k=key();if(!k)throw{code:'no_key',message:'No Gemini key set'};let res;
+    try{res=await fetch(BASE+path,{method,signal,headers:{'content-type':'application/json','x-goog-api-key':k},body:body?JSON.stringify(body):undefined})}
+    catch(e){if(signal&&signal.aborted)throw{code:'cancelled',message:'stopped'};throw{code:'network',message:String(e&&e.message||e)}}
+    if(!res.ok){let b=null;try{b=await res.json()}catch(e){}throw errorFrom(res.status,b)}return res}
+  async function withModels(models,fn){let last;for(const m of models){try{return await fn(m)}catch(e){last=e;if(!(e&&(e.code==='rate_limited'||e.code==='not_found')))throw e}}throw last}
+  // One round of chat with function calling. Returns the model's content (parts kept whole, so thought signatures go back with tool results).
+  async function chatRound({system,contents,tools,signal}){
+    return withModels(MODELS.chat,async model=>{const body={systemInstruction:{parts:[{text:system}]},contents,generationConfig:{temperature:.4,maxOutputTokens:1400}};
+      if(tools&&tools.length)body.tools=[{functionDeclarations:tools}];
+      const res=await call(`/models/${model}:generateContent`,body,{signal});const j=await res.json();
+      const c=((j.candidates||[])[0]||{}).content||{role:'model',parts:[]};if(!c.role)c.role='model';return c})}
+  const b64ToBytes=s=>{const bin=atob(s);const u=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);return u};
+  function toWav(bytes,mime){if(bytes.length>12&&String.fromCharCode(...bytes.slice(0,4))==='RIFF')return new Blob([bytes],{type:'audio/wav'});
+    const rate=+(String(mime||'').match(/rate=(\d+)/)||[])[1]||24000;const h=new ArrayBuffer(44),v=new DataView(h);const w=(o,s)=>{for(let i=0;i<s.length;i++)v.setUint8(o+i,s.charCodeAt(i))};
+    w(0,'RIFF');v.setUint32(4,36+bytes.length,true);w(8,'WAVE');w(12,'fmt ');v.setUint32(16,16,true);v.setUint16(20,1,true);v.setUint16(22,1,true);
+    v.setUint32(24,rate,true);v.setUint32(28,rate*2,true);v.setUint16(32,2,true);v.setUint16(34,16,true);w(36,'data');v.setUint32(40,bytes.length,true);
+    return new Blob([h,bytes],{type:'audio/wav'})}
+  function audioFrom(body){const parts=(((body.candidates||[])[0]||{}).content||{}).parts||[];
+    for(const p of parts){const d=p.inlineData||p.inline_data;if(d&&d.data)return toWav(b64ToBytes(d.data),d.mimeType||d.mime_type)}
+    for(const st of body.steps||[])for(const c of st.content||[])if((c.type==='audio'||c.data)&&c.data)return toWav(b64ToBytes(c.data),c.mime_type||c.mimeType);
+    if(body.output_audio&&body.output_audio.data)return toWav(b64ToBytes(body.output_audio.data),body.output_audio.mime_type);
+    throw{code:'no_audio',message:'No audio in the reply'}}
+  const SHAPES={generate:(model,text,v)=>[`/models/${model}:generateContent`,{contents:[{role:'user',parts:[{text}]}],generationConfig:{responseModalities:['AUDIO'],speechConfig:{voiceConfig:{voice:v}}}}],
+    interactions:(model,text,v)=>['/interactions',{model,input:[{type:'user_input',content:[{type:'text',text}]}],response_format:{type:'audio'},generation_config:{speech_config:[{voice:v}]}}]};
+  const cache=new Map();
+  async function speech(text,{signal}={}){const v=voice();if(!v||!v.id)throw{code:'no_voice',message:'No voice designed yet'};const ck=v.id+'|'+text;if(cache.has(ck))return cache.get(ck);
+    const remembered=store.get(SHAPE_STORE);const order=remembered==='interactions'?['interactions','generate']:['generate','interactions'];
+    const blob=await withModels(MODELS.tts,async model=>{let last;for(const shape of order){try{const [path,body]=SHAPES[shape](model,text,v.id);const res=await call(path,body,{signal});const b=audioFrom(await res.json());store.set(SHAPE_STORE,shape);return b}catch(e){last=e;if(!(e&&(e.code==='invalid_request'||e.code==='no_audio'||e.code==='not_found')))throw e}}throw last});
+    cache.set(ck,blob);if(cache.size>80)cache.delete(cache.keys().next().value);return blob}
+  async function design(prompt){const input=String(prompt||DEFAULT_PROMPT).trim();
+    const tries=[{store:true,voice:{model:MODELS.tts[0],type:'prompted',display_name:'Gooby Goober voice',gender:'female',language_code:'en-NZ',prompted:{input}}},
+      {store:true,voice:{model:MODELS.tts[0],type:'prompted',display_name:'Gooby Goober voice',prompted:{input,gender:'female',language_code:'en-NZ',region_code:'NZ'}}},
+      {store:true,voice:{type:'prompted',prompted:{input}}}];
+    let last;for(const body of tries){try{const res=await call('/voices',body);const r=await res.json();const v=r.voice||r;const id=v.id||(v.name?String(v.name).replace(/^voices\//,''):'');
+      if(!id)throw{code:'no_voice',message:'No voice id came back'};const sa=v.sample_audio||v.sampleAudio;const sample=sa&&sa.data?toWav(b64ToBytes(sa.data),sa.mime_type||sa.mimeType):null;
+      setVoice({id,prompt:input,at:Date.now()});cache.clear();return{id,sample}}catch(e){last=e;if(!(e&&e.code==='invalid_request'))throw e}}throw last}
+  return{key:()=>!!key(),setKey,voice,setVoice,design,speech,chatRound,DEFAULT_PROMPT,MODELS};
+})();
+
+/* ===== Voice: device speech and hold-to-talk (ported from Gooby Goober) ===== */
+const Voice=(()=>{
+  const canSpeak=typeof W.speechSynthesis!=='undefined'&&typeof W.SpeechSynthesisUtterance!=='undefined';
+  const Rec=W.SpeechRecognition||W.webkitSpeechRecognition;const canListen=!!Rec;
+  const EN_FEMALE=['samantha','karen','moira','tessa','fiona','serena','allison','ava','susan','zoe','nicky','kathy','victoria','zira','aria','jenny','michelle','sonia','libby','natasha','emma','clara','amber','catherine','hazel','isla','molly','google us english','female'];
+  const EN_MALE=['daniel','alex','fred','tom','oliver','arthur','aaron','gordon','lee','rishi','david','mark','guy','ryan','william','mitchell','male'];
+  const has=(nm,list)=>list.some(x=>nm.includes(x));
+  function allVoices(){try{return(W.speechSynthesis&&W.speechSynthesis.getVoices())||[]}catch(e){return[]}}
+  const LOCALE=l=>(/^en[-_]nz/i.test(l)?400:/^en[-_]au/i.test(l)?200:0);
+  function score(v,known){const nm=(v.name||'').toLowerCase();let s=0;if(has(nm,known))s+=100;if(/premium|enhanced|neural|natural|online/.test(nm))s+=30;if(/compact|eloquence/.test(nm))s-=40;if(v.localService)s+=10;return s}
+  function englishFemale(){return allVoices().filter(v=>{const nm=(v.name||'').toLowerCase(),l=v.lang||'';if(!/^en/i.test(l)||has(nm,EN_MALE))return false;return has(nm,EN_FEMALE)||/^en[-_]nz/i.test(l)}).sort((a,b)=>(score(b,EN_FEMALE)+LOCALE(b.lang||''))-(score(a,EN_FEMALE)+LOCALE(a.lang||'')))}
+  function choices(){return{list:englishFemale()}}
+  function pick(name){const{list}=choices();return list.find(v=>v.name===name)||list[0]||null}
+  const ONES=['zero','one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve','thirteen','fourteen','fifteen','sixteen','seventeen','eighteen','nineteen'];
+  const TENS=['','','twenty','thirty','forty','fifty','sixty','seventy','eighty','ninety'];
+  const numWord=n=>n<20?ONES[n]:n<100?TENS[Math.floor(n/10)]+(n%10?'-'+ONES[n%10]:''):String(n);
+  const ORDW={1:'first',2:'second',3:'third',4:'fourth',5:'fifth',6:'sixth',7:'seventh',8:'eighth',9:'ninth',10:'tenth',11:'eleventh',12:'twelfth',13:'thirteenth',16:'sixteenth',32:'thirty-second'};
+  const SUF_WORDS={'m7♭5':'minor seven flat five',maj13:'major thirteen',m13:'minor thirteen','13':'thirteen',m11:'minor eleven','11':'eleven',maj9:'major nine',m9:'minor nine','9':'nine',maj7:'major seven',m7:'minor seven','7':'seven',m6:'minor six','6':'six',sus2:'sus two',sus4:'sus four',dim:'diminished',m:'minor','':''};
+  const CHORD=/^([A-G])([♯♭#b]?)(m7♭5|m7b5|maj13|maj9|maj7|m13|m11|m9|m7|m6|sus2|sus4|dim|13|11|9|7|6|m)?(?:\/([A-G][♯♭#b]?))?$/;
+  const note=(l,acc)=>{const L=l==='A'?'ay':l;return L+(acc==='♯'||acc==='#'?' sharp':acc==='♭'||acc==='b'?' flat':'')};
+  function token(t){const c=t.match(CHORD);if(c){let s=note(c[1],c[2]);const suf=(c[3]||'').replace('m7b5','m7♭5');if(suf)s+=' '+SUF_WORDS[suf];if(c[4])s+=' over '+note(c[4][0],c[4].slice(1));return s}
+    const deg=t.match(/^([♭♯])(\d+)$/);if(deg)return(deg[1]==='♭'?'flat ':'sharp ')+numWord(+deg[2]);return t}
+  function speakable(text){let s=String(text||'').replace(/→/g,' to ').replace(/\s\+\s/g,' and ').replace(/·/g,', ').replace(/—|–/g,', ').replace(/\(/g,', ').replace(/\)/g,', ');
+    s=s.split(/(\s+)/).map(w=>{const m=w.match(/^([^\wА-я♯♭/#]*)([\w♯♭/#]+)([^\w♯♭/#]*)$/u);if(!m)return w;return m[1]+token(m[2])+m[3]}).join('');
+    s=s.replace(/\b(\d+)(st|nd|rd|th)\b/g,(_,n)=>ORDW[+n]||numWord(+n)).replace(/(\d+)\/(\d+)/g,(_,a,b)=>numWord(+a)+' '+numWord(+b)).replace(/\b\d+\b/g,n=>numWord(+n))
+      .replace(/♯/g,' sharp').replace(/♭/g,' flat').replace(/\s{2,}/g,' ').replace(/\s+([,.?])/g,'$1').replace(/,\s*,/g,',').trim();return s}
+  let speaking=false;
+  function speak(text,{voiceName,rate=.92,done}={}){let fired=false;const end=()=>{if(fired)return;fired=true;speaking=false;if(done)done()};if(!canSpeak||!text){end();return}
+    try{W.speechSynthesis.cancel();const u=new W.SpeechSynthesisUtterance(text);const v=pick(voiceName);if(v){u.voice=v;u.lang=v.lang}u.rate=rate;u.pitch=1.05;u.onend=end;u.onerror=end;speaking=true;W.speechSynthesis.speak(u);setTimeout(end,Math.min(30000,1500+text.length*90))}catch(e){end()}}
+  function hush(){speaking=false;try{if(canSpeak)W.speechSynthesis.cancel()}catch(e){}}
+  function unlock(voiceName){if(!canSpeak)return;try{const u=new W.SpeechSynthesisUtterance(' ');const v=pick(voiceName);if(v){u.voice=v;u.lang=v.lang}u.volume=0;W.speechSynthesis.speak(u)}catch(e){}}
+  function listen({lang,onHear,onDone,onError}){if(!Rec){if(onError)onError('unsupported');return null}let r;try{r=new Rec()}catch(e){if(onError)onError('unsupported');return null}
+    r.lang=lang||'en-NZ';r.interimResults=true;r.continuous=true;r.maxAlternatives=1;let finalText='',interim='',ended=false,failed=false;
+    r.onresult=e=>{let fin='',mid='';for(let i=0;i<e.results.length;i++){const res=e.results[i];if(res.isFinal)fin+=res[0].transcript+' ';else mid+=res[0].transcript+' '}finalText=fin.trim();interim=mid.trim();if(onHear)onHear((finalText+' '+interim).trim())};
+    r.onerror=e=>{const k=e&&e.error;if(k==='aborted')return;failed=true;if(onError)onError(k==='not-allowed'||k==='service-not-allowed'?'blocked':k==='no-speech'?'silence':k==='audio-capture'?'nomic':'failed')};
+    r.onend=()=>{if(ended)return;ended=true;if(!failed&&onDone)onDone((finalText+' '+interim).trim())};
+    try{r.start()}catch(e){if(onError)onError('failed');return null}
+    return{stop:()=>{try{r.stop()}catch(e){}},abort:()=>{ended=true;try{r.abort()}catch(e){}}}}
+  return{canSpeak,canListen,choices,pick,speakable,speak,hush,unlock,listen,get speaking(){return speaking}};
+})();
+
+/* ===== settings ===== */
+const SET_KEY='gl.helper.settings.v1';
+const S={open:false,view:'chat',turns:[],busy:null,listening:null,route:'guide',sample:null,sampleTools:false,geminiBlocked:false,
+  settings:{readAloud:false,voiceEngine:'gemini',voiceName:''}};
+try{Object.assign(S.settings,JSON.parse(localStorage.getItem(SET_KEY)||'{}'))}catch(e){}
+const saveSettings=()=>{try{localStorage.setItem(SET_KEY,JSON.stringify(S.settings))}catch(e){}};
+
+/* ===== the site: pages, controls, actions ===== */
+const PAGES={overview:'Home',explorer:'Find chord shapes',voicings:'My chord library',transLab:'Fills between chords',harmonic:'What chord next?',jam:'Chord jam (mic)',harmonizer:'Harmonize a melody',ear:'Ear training',rhythm:'Rhythm & singing'};
+const ALIASES={overview:['home','start','main','landing'],explorer:['explorer','fretboard explorer','chord shapes','find chord','shapes','voicing finder','find shapes'],voicings:['library','chord library','my chords','saved','voicing editor','my voicings'],
+  transLab:['fills','fill','transition','transition studio','licks','fills between'],harmonic:['harmonic map','map','what chord next','next chord','neon','circle','progression builder','harmony map'],
+  jam:['jam','chord jam','mic','microphone','listen'],harmonizer:['harmonizer','harmonise','harmonize','melody','chord melody'],ear:['ear','ear training','ear trainer'],rhythm:['rhythm','singing','strum','strumming','sing']};
+const lab=()=>D.getElementById('lab');
+const curTab=()=>{const t=D.querySelector('#lab .tab.active');return t?t.id:'overview'};
+const isSimple=()=>!!(lab()&&lab().classList.contains('simple'));
+const norm=s=>String(s||'').toLowerCase().replace(/♯/g,'#').replace(/♭/g,'b').replace(/[^a-z0-9#°+/ ]+/g,' ').replace(/\s+/g,' ').trim();
+function goTo(page){const id=PAGES[page]?page:Object.keys(ALIASES).find(k=>ALIASES[k].some(a=>norm(page).includes(a)))||Object.keys(PAGES).find(k=>norm(PAGES[k])===norm(page));
+  if(!id)throw new Error('No page called "'+page+'". Pages: '+Object.keys(PAGES).join(', '));
+  const b=D.querySelector(`#lab nav button[data-tab="${id}"]`);if(b)b.click();W.scrollTo({top:0,behavior:'smooth'});return id}
+function setDetail(level){const b=D.querySelector(`#lab [data-view="${level==='full'?'full':'simple'}"]`);if(b&&!b.classList.contains('on'))b.click();return isSimple()?'simple':'full'}
+function labelOf(e){const l=e.closest('label');let s='';if(l){const sp=l.querySelector('span');s=(sp?sp.textContent:l.textContent)}if(!s)s=e.getAttribute('aria-label')||e.title||e.id;return s.trim().replace(/\s+/g,' ').replace(/\s*\d+\s*BPM$/,'').slice(0,60)}
+const visible=e=>!!(e&&(e.offsetParent||e.getClientRects().length));
+function scopeEls(){const t=D.querySelector('#lab .tab.active');const head=D.querySelector('#lab > header');return[t,head].filter(Boolean)}
+function controls(){const out=[];scopeEls().forEach(sc=>sc.querySelectorAll('select[id],input[id]').forEach(e=>{if(e.type==='file'||e.type==='hidden')return;
+  const hiddenSimple=!!e.closest('.adv')&&isSimple();const o={id:e.id,label:labelOf(e),type:e.tagName==='SELECT'?'select':e.type,visible:visible(e),onlyInFull:hiddenSimple};
+  if(e.tagName==='SELECT'){o.value=e.value;o.valueLabel=(e.selectedOptions[0]||{}).text;o.options=[...e.options].slice(0,40).map(x=>x.value+'='+x.text)}
+  else if(e.type==='checkbox')o.value=e.checked;else o.value=e.value;if(e.type==='range'){o.min=e.min;o.max=e.max}out.push(o)}));return out}
+function buttons(){const out=[];scopeEls().forEach(sc=>sc.querySelectorAll('button').forEach(b=>{const t=(b.textContent||'').trim().replace(/\s+/g,' ');if(!t||t.length>60&&!b.id)return;if(!visible(b)&&!b.closest('.adv'))return;out.push((b.id?b.id+': ':'')+t.slice(0,48))}));return[...new Set(out)].slice(0,60)}
+function revealEl(e){if(e.closest('.adv')&&isSimple())setDetail('full');let d=e.closest('details');while(d){d.open=true;d=d.parentElement&&d.parentElement.closest('details')}}
+function findControl(idOrLabel){let e=D.getElementById(String(idOrLabel));if(e&&scopeEls().some(s=>s.contains(e))&&/SELECT|INPUT|TEXTAREA/.test(e.tagName))return e;
+  const n=norm(idOrLabel);const all=[];scopeEls().forEach(sc=>sc.querySelectorAll('select[id],input[id],textarea[id]').forEach(x=>all.push(x)));
+  return all.find(x=>norm(labelOf(x))===n)||all.find(x=>norm(labelOf(x)).startsWith(n))||all.find(x=>norm(labelOf(x)).includes(n))||null}
+function setControl(idOrLabel,value){const e=findControl(idOrLabel);if(!e)throw new Error('No control "'+idOrLabel+'" on this page. Call list_controls to see them.');revealEl(e);
+  if(e.tagName==='SELECT'){const v=String(value),nv=norm(v);const opts=[...e.options];
+    const o=opts.find(x=>x.value===v)||opts.find(x=>norm(x.text)===nv)||opts.find(x=>norm(x.value)===nv)||opts.find(x=>norm(x.text).startsWith(nv))||opts.find(x=>nv.length>2&&norm(x.text).includes(nv));
+    if(!o)throw new Error(`"${v}" is not an option for ${labelOf(e)}. Options: `+opts.slice(0,30).map(x=>x.text).join(', '));e.value=o.value}
+  else if(e.type==='checkbox'){e.checked=value===true||/^(true|on|yes|1|checked)$/i.test(String(value))}
+  else{e.value=String(value)}
+  e.dispatchEvent(new Event('input',{bubbles:true}));e.dispatchEvent(new Event('change',{bubbles:true}));flash(e);
+  return labelOf(e)+' = '+(e.tagName==='SELECT'?e.selectedOptions[0].text:e.type==='checkbox'?(e.checked?'on':'off'):e.value)}
+const BLOCK=/delete|remove|import|export|backup|download|↓ svg/i;
+function findButton(idOrText){let b=D.getElementById(String(idOrText));if(b&&b.tagName==='BUTTON'&&scopeEls().some(s=>s.contains(b)))return b;
+  const n=norm(idOrText);const all=[];scopeEls().forEach(sc=>sc.querySelectorAll('button').forEach(x=>all.push(x)));const tx=x=>norm(x.textContent);
+  return all.find(x=>tx(x)===n)||all.find(x=>tx(x).startsWith(n))||all.find(x=>n.length>2&&tx(x).includes(n))||null}
+function press(idOrText){const b=findButton(idOrText);if(!b)throw new Error('No button "'+idOrText+'" on this page.');const t=(b.textContent||'').trim().replace(/\s+/g,' ');
+  if(BLOCK.test(t)||BLOCK.test(b.id))throw new Error('That button ('+t+') changes or removes saved data, so the user has to press it themselves. Point at it with highlight instead.');
+  revealEl(b);b.click();flash(b);return 'Pressed "'+t.slice(0,50)+'"'}
+function flash(e){try{e.scrollIntoView({behavior:'smooth',block:'center'})}catch(x){}e.classList.remove('glh-flash');void e.offsetWidth;e.classList.add('glh-flash');setTimeout(()=>e.classList.remove('glh-flash'),2600)}
+function highlight(idOrText){const e=findControl(idOrText)||findButton(idOrText);if(!e)throw new Error('Nothing called "'+idOrText+'" on this page.');revealEl(e);flash(e);return 'Pointing at '+(labelOf(e)||e.textContent.trim().slice(0,40))}
+function readPage(){const t=D.querySelector('#lab .tab.active');if(!t)return '';let s=(t.innerText||'').replace(/\n{2,}/g,'\n').replace(/[ \t]+/g,' ');return s.slice(0,3500)}
+function pageContext(){const id=curTab();const cs=controls().filter(c=>c.visible||c.onlyInFull).slice(0,40).map(c=>`${c.label} [${c.id}] = ${c.type==='select'?c.valueLabel:c.value}${c.onlyInFull?' (Full detail)':''}`);
+  return `Current page: ${PAGES[id]||id} (id ${id}). Detail level: ${isSimple()?'Simple':'Full detail'}.\nControls on this page: ${cs.join('; ')||'none'}.\nButtons: ${buttons().join('; ')}.`}
+
+/* tool catalogue: one definition, used by Gemini and by Claude */
+const TOOLS=[
+ {name:'go_to_page',description:'Open one of the Guitar Lab pages. Returns the page id that is now open.',parameters:{type:'object',properties:{page:{type:'string',enum:Object.keys(PAGES),description:'Page id: '+Object.entries(PAGES).map(([k,v])=>k+' = '+v).join(', ')}},required:['page']},run:a=>'Opened '+PAGES[goTo(a.page)]},
+ {name:'set_detail_level',description:'Switch the whole site between Simple (fewer controls, beginner) and Full detail (every control). Some controls only exist in Full detail.',parameters:{type:'object',properties:{level:{type:'string',enum:['simple','full']}},required:['level']},run:a=>'Detail level is now '+setDetail(a.level)},
+ {name:'list_controls',description:'List the dropdowns, sliders, checkboxes and text boxes on the current page with their ids, labels, current values and options. Use before set_control when unsure of an id or option.',run:()=>controls()},
+ {name:'set_control',description:'Set a control on the current page, by id or label. For dropdowns give the option value or its visible text (e.g. "Major 9", "F"). For checkboxes give true or false. Returns the new value.',parameters:{type:'object',properties:{id:{type:'string',description:'Control id or label'},value:{type:'string'}},required:['id','value']},run:a=>setControl(a.id,a.value)},
+ {name:'press_button',description:'Press a button on the current page, by id or its visible text (e.g. "Show shapes", "Generate a new fill", "Harmonize"). Buttons that delete, import or export are refused.',parameters:{type:'object',properties:{button:{type:'string'}},required:['button']},run:a=>press(a.button)},
+ {name:'highlight',description:'Scroll to and flash a control or button on the current page so the user can see where it is. Use when explaining where something is.',parameters:{type:'object',properties:{target:{type:'string',description:'Id, label or button text'}},required:['target']},run:a=>highlight(a.target)},
+ {name:'read_page',description:'Read the visible text of the current page, to see results (shapes found, the suggested chord, the generated fill, scores).',run:()=>readPage()}];
+async function runTool(name,args){const t=TOOLS.find(x=>x.name===name);if(!t)throw new Error('Unknown tool '+name);const r=await t.run(args||{});note(actionLine(name,args,r));await new Promise(res=>setTimeout(res,name==='press_button'||name==='go_to_page'?350:60));return r}
+function actionLine(name,a,r){a=a||{};if(name==='go_to_page')return '→ '+r;if(name==='set_control')return '✓ '+r;if(name==='press_button')return '✓ '+r;if(name==='set_detail_level')return '✓ '+r;if(name==='highlight')return '👀 '+r;return null}
+
+/* ===== what the helper knows about the site ===== */
+const GUIDE=[
+ ['overview','Home',['Home has a goal card for each tool; tapping one opens that tool.','Quick drills (Fills off a degree, 2–5–1 round the circle, Sus chords in songs, Sing over the strum) open the right tool already set up.','"Theory in 2 minutes" is a short primer with sound: degrees, chords and what each chord is for.','"Words used in Guitar Lab" is the glossary; any word with a dotted underline explains itself when tapped.','The Simple / Full detail switch at the top right changes the whole site: Simple hides advanced controls, Full shows everything. The choice is remembered in this browser.']],
+ ['explorer','Find chord shapes (Fretboard Explorer)',['Pick a Chord root and Chord quality, choose Open strings (Allowed, Prefer open shapes, Only open shapes, No open strings), then press Show shapes.','Each tile is a chord diagram; tap it to hear it and see it on the big neck below, with each note labelled by degree.','Show more shapes loads further tiles; the count shows how many were found.','Tile labels: the title says which degree is in the bass and how many strings ring. Under the diagram are the frets (x = muted, 0 = open); "2 open" means two open strings ring, "Stretch" is the fret span, "colour note" counts extensions like 9 or 13, and BASE marks the standard shape.','In Full detail, "More fretboard filters" adds string set, voicing family (shell, triads, drop-2, rootless, spread), difficulty, maximum fret span, neck area, reference key and scale, CAGED zones and extra chord tones.','Under the neck: Hear chord, name it and Save this voicing to your library, or Use as transition start to send it to Fills between chords.','In Full detail, "Find closest next voicing" picks a next chord and finds the grip with the least movement, then can open the pair in Fills between chords.']],
+ ['voicings','My chord library',['Pick a Root and Quality to load its standard shape, then edit it string by string on the neck: tap a fret to place a finger, tap again or use the string controls to mute.','Name the shape and press Save as new voicing; Update this voicing changes a saved one. The standard shape can never be overwritten.','Play chord strums it. Open-string versions lists shapes that let open strings ring; tap one to load it into the editor.','Delete selected custom needs two clicks. Export backup and Import backup (Full detail) save or load your library as a file.']],
+ ['transLab','Fills between chords (Transition Studio)',['Pick chord A and chord B (root, quality and voicing), then choose a style and press Generate a new fill.','All grips uses full shapes; Triad shapes lists every triad and inversion on each string set, and can auto-pick the closest B triad.','Techniques: voice-leading, chromatic, double-stops, diminished, secondary 5, triad inversions, embellishments, rhythmic motifs.','Player styles: Fingerstyle melody (Cole Teeple, Tommy Emmanuel), Neo-soul double-stops (John Mayer, Hendrix, Isaiah Sharkey), Jazz lines (Wes, Joe Pass, Pat Martino), Blues phrasing (B.B. King, Stevie Ray Vaughan), Country 6ths (Chet Atkins, Merle Travis), Folk bass walk (James Taylor, Paul Simon).','Play latest phrase plays it; set Tempo and Speed (50 to 125%) to slow it down. Tap any tab column to hear just those notes.','The live fretboard shows the notes moving, as fret numbers, key degrees or pitch names; "Why this passage works" explains each note.','Challenge mode hides the tab so you learn it by ear; Save this phrase keeps it in the phrase notebook.','In Full detail, "Phrase length & feel" sets the number of notes, movement, rhythm feel, neck travel, key, starting degree, resolution and metronome; Copy ASCII tab copies the tab as text.']],
+ ['harmonic','What chord next? (Harmonic Map)',['Set the Home key and major or minor, then choose your chord (root and quality). The map shows every useful move from it.','Center connections: lines from your chord, coloured by family: inside the key, functional pull, borrowed colour, substitution, shared tones, sus colour. Tap a chord to inspect and hear the move; double-click (or "Explore its connections") to make it the centre.','Diatonic Pathways shows how every chord in the key connects. Neon circle shows all 12 keys with their 5 chords; pinch or Ctrl-scroll to zoom, double-tap to zoom, drag to pan.','Return to tonic jumps back to the 1 chord; Fine-tune the map sets families, how many connections, chord vocabulary (triads, 7ths, 9ths, 6ths) and sorting.','"Where should I go next?" compares a few candidate chords with Pull, Smooth and Colour scores, and can suggest a spread.','Progression path builder: add chords from the map or pick a preset (1–6–2–5–1, 2–5–1, borrowed minor 4…), play it at your tempo, or export it.','Learn the language is a short lesson series about the map.','In Full detail: the voice-leading lab (chord A to B voice by voice, guide tones), modulation routes between two keys with pivot chords, the 2–5–1 round the circle drill, comparing two chords, and SVG export.']],
+ ['jam','Chord jam (mic)',['Press Start listening and allow the mic, then strum a chord and let it ring. It recognises the chord and suggests a next chord, with the reason, which notes move, and a grip.','Play the suggestion in any voicing: when the mic hears it, the next one appears. If it misses, press I played it. Another idea gives a different move; Hear it and Hear the move play them.','Style of next chord: Songwriter (strong in-key moves), Smooth voice leading, Borrowed & colour chords, Jazz moves, or Mix of everything.','Key: worked out from what you play, or set it. Voicings: Basic (triads, easy open grips), Complex (7th chords, movable barre grips), Advanced (9ths, 13ths, 6/9, 7♭9, jazz grips).','Some ideas are 2 or 3 chords long (♭6 → ♭7 → 1, sus4 → resolve, 5 of 6 → 6) and it plays them out; it heads for a 5 or a 1 at the end of each phrase.','In Full detail: phrase length (4 or 8 chords), mic sensitivity, and whether it follows you when you play something else.','No mic? Use "Tell it your chord" to pick your chord. The mic needs the GitHub Pages copy (https); the Claude app blocks it. Nothing is recorded.']],
+ ['harmonizer','Harmonize a melody (Harmonizer)',['Set the key and scale, then enter the melody: tap degree buttons, or type degrees and press Apply (b or # for flats and sharps, 8 = 1 an octave up, an apostrophe = up an octave, :2 = 2 beats long). Or load a preset line.','Press Harmonize: chords go under the melody with the melody note on top of every grip.','Style tabs: Diatonic, Borrowed, Chromatic, Jazz, Planing, Pedal; each has several options, and Another option cycles them.','Each chord card has grip arrows to try other grips and Swap chord to change the chord. Play, Stop, Loop, + To progression and Save are above the cards.','Settings: where chords fall (every note, every 2 beats, once per bar, manual), chord vocabulary, voicing texture (full grips, shells, fragments, dyads, bass + melody), neck position, prefer open strings, tempo.','"Why this works" explains each chord; Tab shows the whole chord melody as tab with Copy tab. Saved ones are under My chord melodies.']],
+ ['ear','Ear training',['Melody · degrees: press New melody, hear the key then a short melody, and tap the degrees you heard in order; Reveal answer shows it. Options: key, scale, notes used, length, movement, key reference (1–4–5–1), always start on 1.','Harmony · chord moves: press New question, hear the 1 chord then a move, and pick it (5 → 1, 4 → 1, 2 → 5 → 1, 5 → 6 deceptive, minor 4 → 1). Hear my answer plays your guess in the same key; See the voices opens it in the voice-leading lab.']],
+ ['rhythm','Rhythm & singing',['A one-bar, 16-step grid: the top row is the strum (D and U show hand direction), the bottom row is a vocal rhythm. Tap cells to add or remove hits.','New patterns makes new ones; Play loop loops them. Set tempo, strum density, voice rhythm (off, with or against the strum), and what you hear (both, strum only, voice only, click only) to practise doing one part yourself.']],
+ ['helper','This helper',['The helper button is on every page. Type or hold the mic button to ask; it can open tools, set controls and press buttons for you.','Settings (gear): add a free Gemini key from aistudio.google.com → Get API key; it stays in this browser and is sent only to Google. Create a voice from a description to hear replies in Gemini\'s designed voice, or use the device voice.','Inside the Claude app, Gemini can\'t be reached, so the helper uses Claude there; with no AI available it answers from its built-in guide.']]];
+const FAQ=[
+ [['colour','colours','color','colors','legend','lines'],'Each line is a move from your chord, coloured by family: **Inside the key**, **Functional pull** (wants to resolve), **Borrowed colour** (from the parallel key), **Substitution**, **Shared-tone neighbour** and **Suspended colour**. The legend under the map shows how many of each; tap a chord to hear its move.','harmonic','harmonic'],
+ [['start with','where do i start','which tool','new here','beginner','what can i do'],'New here? Start on **Home** with "Theory in 2 minutes", then try **Find chord shapes** (every way to play a chord) or **Chord jam** (strum a chord, get a good next one). Once you know a few moves, **What chord next?** and **Fills between chords** go deeper.','overview'],
+ [['no sound','sound','audio','cant hear','silent','mute'],'Sounds play from built-in guitar samples after your first tap on the page. If it\'s silent, check the device isn\'t on silent mode (iPhone side switch) and the volume is up, then press a play button again.',null],
+ [['pick','choose','decide','suggest','suggestions','how does it','random'],'It works out your key, then knows what each degree tends to do (5 pulls to 1, 2 sets up 5, 6 drops to 4). On top it mixes other kinds of move, weighted by **Style of next chord**: smooth voice leading, borrowed chords (♭7, ♭6, minor 4), sus chords that resolve, secondary 5s, jazz moves and filmic shifts. Some ideas run over 2 or 3 chords (♭6 → ♭7 → 1), and it heads for a 5 or a 1 at the end of each phrase.','jam','jam'],
+ [['mic','microphone','blocked','permission','not working','doesnt work','isnt working'],'The mic works on the GitHub Pages copy (https) after you allow it in the browser. The Claude app blocks it. In Chord jam you can use "Tell it your chord" instead, and the helper accepts typed questions.','jam'],
+ [['simple','full detail','advanced controls','missing','where is','hidden'],'Some controls only appear in Full detail. Switch with Simple / Full detail at the top right; it applies to every page.',null],
+ [['save','keep','library','saved','my own'],'Shapes save to My chord library (Save this voicing in Find chord shapes, or Save as new voicing in the library). Fills save with Save this phrase; chord melodies with Save in the Harmonizer. Everything is stored in this browser.',null],
+ [['what are degrees','scale degrees','what is a degree','degrees mean','what do the numbers mean'],'Everything uses scale degrees: 1 is home, 4 and 5 are the strong neighbours, and ♭ or ♯ marks a note outside the key (♭7, ♯4). Degrees work in every key.','overview'],
+ [['zoom','pinch','neon'],'On the Neon circle: pinch or Ctrl/Cmd-scroll to zoom, double-tap to zoom in, drag to pan, and Fit resets the view.','harmonic'],
+ [['gemini','key','api'],'Open the helper\'s settings (gear) and paste a free Gemini key from aistudio.google.com → Get API key. It stays in this browser and is only sent to Google.',null]];
+function guideText(){return GUIDE.map(([id,t,ls])=>`## ${t}${PAGES[id]?' [page id: '+id+']':''}\n- `+ls.join('\n- ')).join('\n\n')}
+const RULES=`You are the Guitar Lab helper, built into the Guitar Lab website (a guitar practice studio). Your one job is helping the user use THIS website: what each page and control does, where things are, how to use the tools for their practice, and operating the site for them with your tools.
+How to answer:
+- Short and plain: 1 to 4 sentences, or a few short bullets for steps. No preamble.
+- When the user asks to see, open, set, play, find or do something on the site, DO it with your tools (go_to_page, set_control, press_button…), then say in one sentence what you did and what to look at. Prefer doing over describing.
+- To show where something is, use highlight.
+- Use the controls and buttons in the page context; call list_controls if you need option values. If a control is marked (Full detail), set_control switches the view for you.
+- Never press buttons that delete, import or export; tell the user where they are instead.
+- Music theory: use bare scale degrees (1, 4, 5, ♭7, ♭6). Never Roman numerals, never Nashville suffixes like 6m.
+- Only describe features listed in the guide or visible on the page. If something isn't possible here, say so and point to the closest tool.
+- If asked about something unrelated to the site, say in one line that you're the Guitar Lab helper and how the site could help with it.
+- Text only: plain sentences, **bold** for control names, "- " for bullets. No headings, no tables.
+
+The site guide:
+${''}`;
+function systemPrompt(){return RULES+guideText()+'\n\n'+pageContext()}
+
+/* ===== offline brain: the guide plus simple commands ===== */
+const STOP=new Set('a an the to of and or in on for is it i my me do does how what where can you this that with be are am at by from use using show tell about please want get there here make help'.split(' '));
+const words=s=>norm(s).split(' ').filter(w=>w&&!STOP.has(w));
+const ROOT_IX={c:0,'c#':1,db:1,d:2,'d#':3,eb:3,e:4,f:5,'f#':6,gb:6,g:7,'g#':8,ab:8,a:9,'a#':10,bb:10,b:11};
+const QMAP=[['m7b5','m7b5'],['ø','m7b5'],['maj13','maj13'],['maj9','maj9'],['maj7','maj7'],['m13','m13'],['m11','m11'],['madd9','madd9'],['m9','m9'],['m7','m7'],['m6','m6'],['min7','m7'],['7sus4','7sus4'],['7b9','7b9'],['7#9','7#9'],['dim7','dim7'],['°7','dim7'],['add9','add9'],['sus2','sus2'],['sus4','sus4'],['6/9','6/9'],['13','13'],['11','11'],['9','9'],['7','7'],['6','6'],['5','5'],['aug','aug'],['+','aug'],['min','min'],['m','min'],['maj','maj'],['','maj']];
+function parseChords(text){const out=[];String(text).split(/\s+(?:to|and|->|→|then)\s+|,\s*/i).forEach(part=>{part.split(/\s+/).forEach(w=>{const c=parseChord(w);if(c)out.push(c)})});return out}
+function parseChord(text){const m=String(text).replace(/♯/g,'#').replace(/♭/g,'b').match(/\b([A-G])([#b]?)((?:maj|min|m|dim|sus|add|aug|ø|°)?[0-9#b/+]*(?:sus[24])?)(?=\s|$|[,.?!])/);
+  if(!m)return null;const r=ROOT_IX[(m[1]+m[2]).toLowerCase()];let rest=m[3].toLowerCase();const q=(QMAP.find(([k])=>rest===k)||[])[1];if(r==null||!q)return null;return{r,q}}
+async function offline(q){const n=norm(q),acts=[];const say=[];
+  const chord=parseChord(q);
+  const doIt=async(name,a)=>{try{await runTool(name,a);acts.push(name)}catch(e){say.push(String(e.message||e))}};
+  if(/\b(full detail|full view|show everything|advanced view)\b/.test(n)){await doIt('set_detail_level',{level:'full'});return 'Switched to Full detail: every control is showing now.'}
+  if(/\b(simple view|simple mode|less clutter|beginner view)\b/.test(n)){await doIt('set_detail_level',{level:'simple'});return 'Switched to Simple: only the main controls are showing.'}
+  if(chord&&/(shape|voicing|ways? to play|how (do i|to) play|grip|fingering)/.test(n)){await doIt('go_to_page',{page:'explorer'});await doIt('set_control',{id:'exRoot',value:String(chord.r)});await doIt('set_control',{id:'exQuality',value:chord.q});await doIt('press_button',{button:'exFind'});return `Here are the shapes for that chord in **Find chord shapes**. Tap a tile to hear it and see it on the neck.`}
+  if(chord&&/(after|next|go to|follow|comes)/.test(n)&&!/fill/.test(n)){await doIt('go_to_page',{page:'harmonic'});await doIt('set_control',{id:'hmRoot',value:String(chord.r)});await doIt('set_control',{id:'hmQuality',value:chord.q});return 'The map in **What chord next?** now centres on that chord. Each line is a move you can make; tap a chord to hear the move.'}
+  const all=parseChords(q);
+  if(all.length>=2&&/fill|lick|between|transition|from/.test(n)){await doIt('go_to_page',{page:'transLab'});const [A,B]=all;
+    await doIt('set_control',{id:'tsFromRoot',value:String(A.r)});await doIt('set_control',{id:'tsFromQuality',value:A.q});await doIt('set_control',{id:'tsToRoot',value:String(B.r)});await doIt('set_control',{id:'tsToQuality',value:B.q});
+    const styles=[['neo','Neo-soul'],['jazz','Jazz lines'],['blues','Blues phrasing'],['country','Country 6ths'],['folk','Folk bass walk'],['fingerstyle','Fingerstyle melody'],['chromatic','Chromatic'],['diminished','Diminished'],['double','Double-stops'],['triad','Triad inversions'],['embellish','Embellishments'],['rhythm','Rhythmic motifs'],['voice','Voice-leading']];
+    const st=styles.find(([k])=>n.includes(k));if(st){if(/neo|jazz|blues|country|folk|fingerstyle/.test(st[0]))await doIt('press_button',{button:'Player styles'});else await doIt('press_button',{button:'Techniques'});await doIt('press_button',{button:st[1]})}
+    await doIt('press_button',{button:'tsGenerate'});return 'Done: a fill between those chords is in **Fills between chords**. Press **Play latest phrase** to hear it, and tap tab columns to hear single notes.'+(say.length?'\n'+say.join(' '):'')}
+  const hz=q.match(/harmoni[sz]e\s+([0-9b#♭♯' :]+?)(?:\s+in\s+([A-G][#b♯♭]?)(?:\s*(major|minor))?)?\s*$/i);
+  if(hz){await doIt('go_to_page',{page:'harmonizer'});if(hz[2]){const r=ROOT_IX[hz[2].replace('♯','#').replace('♭','b').toLowerCase()];if(r!=null)await doIt('set_control',{id:'hzKey',value:String(r)})}if(hz[3])await doIt('set_control',{id:'hzMode',value:hz[3].toLowerCase()});
+    await doIt('set_control',{id:'hzText',value:hz[1].trim()});await doIt('press_button',{button:'hzApply'});await doIt('press_button',{button:'hzGo'});return 'Harmonized in **Harmonize a melody**. Press **Play** to hear it, or try the style tabs (Diatonic, Borrowed, Jazz…) for other versions.'+(say.length?'\n'+say.join(' '):'')}
+  if(/harmony question|chord move question|chord moves/.test(n)&&/start|new|give|quiz/.test(n)){await doIt('go_to_page',{page:'ear'});await doIt('press_button',{button:'Harmony · chord moves'});await doIt('press_button',{button:'ehNew'});return 'Playing a harmony question in **Ear training**: listen for the move after the 1 chord, then pick your answer.'}
+  const setm=q.match(/^\s*(?:set|change|make|switch)\s+(?:the\s+)?(.+?)\s+(?:to|=)\s+(.+?)\s*[.!]?$/i);
+  if(setm){try{const r=setControl(setm[1],setm[2]);note('✓ '+r);return 'Done: **'+r+'**.'}catch(e){say.push(String(e.message||e))}}
+  const pr=q.match(/^\s*(?:press|click|tap|hit)\s+(?:the\s+)?(.+?)(?:\s+button)?\s*[.!]?$/i);
+  if(pr){try{const r=press(pr[1]);note('✓ '+r);return 'Done.'}catch(e){return String(e.message||e)}}
+  if(/what (can i do|is this|does this (page|tool) do)|how does this (page|tool) work|explain this page|where am i/.test(n)){const g=GUIDE.find(x=>x[0]===curTab());if(g)return '**'+g[1]+'**: '+g[2].slice(0,2).join(' ')}
+  const page=/\b(open(?![- ]?strings?)|go to|take me|show me the|switch to|bring up)\b/.test(n)&&Object.keys(ALIASES).find(k=>ALIASES[k].some(a=>n.includes(a)));
+  if(page){await doIt('go_to_page',{page});const g=GUIDE.find(x=>x[0]===page);return `Opened **${PAGES[page]}**. ${g?g[2][0]:''}`}
+  // answer from the guide
+  const qs=words(q);if(!qs.length)return 'Ask me how anything on the site works, or tell me what to open, e.g. "show me Fmaj9 shapes" or "open the chord jam".';
+  let best=null;const hasW=k=>new RegExp('(^|\\s)'+k.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'(\\s|$)').test(n);FAQ.forEach(([keys,ans,pg,only])=>{if(only&&only!==curTab())return;const s=keys.reduce((a,k)=>a+(hasW(norm(k))?(k.includes(' ')?4:3):0),0)*(only?1.6:1);if(s&&(!best||s>best.s))best={s,lines:[ans],pg}});
+  const cur=curTab();GUIDE.forEach(([id,t,ls])=>{const head=words(t+' '+(ALIASES[id]||[]).join(' '));ls.forEach(l=>{const lw=words(l);let s=qs.reduce((a,w)=>a+(lw.includes(w)?1.6:lw.some(x=>x.startsWith(w.slice(0,5))&&w.length>4)?.8:0)+(head.includes(w)?1:0),0);if(id===cur)s*=1.25;if(s>0&&(!best||s>best.s))best={s,lines:[l],pg:id,id}})});
+  if(!best||best.s<1.5)return {text:'I\'m the Guitar Lab helper, so I can only help with this site. I\'m not sure about that one. Try asking about a page or a control, e.g. "how do I save a shape?" or "what does Smooth voice leading do?". With a Gemini key (gear icon) I can answer anything about the site.',go:null};
+  if(best.id){const g=GUIDE.find(x=>x[0]===best.id)[2];const i=g.indexOf(best.lines[0]);if(g[i+1]&&words(g[i+1]).some(w=>qs.includes(w)))best.lines.push(g[i+1])}
+  return{text:best.lines.join(' '),go:best.pg&&best.pg!==cur&&PAGES[best.pg]?best.pg:null};
+}
+
+/* ===== speaking (Gemini voice, else the device) ===== */
+const audioEl=typeof Audio!=='undefined'?new Audio():null;let ttsCtl=null;
+const geminiVoice=()=>S.settings.voiceEngine==='gemini'&&Gemini.key()&&!!(Gemini.voice()||{}).id&&!S.geminiBlocked;
+const jamMute=on=>{try{const J=W.GuitarLabJam;if(J)J.S.muteUntil=on?performance.now()+60000:0}catch(e){}};
+function stopSpeech(){Voice.hush();if(ttsCtl){ttsCtl.abort();ttsCtl=null}try{if(audioEl)audioEl.pause()}catch(e){}jamMute(false)}
+function playBlob(blob){if(!audioEl)return;const url=URL.createObjectURL(blob);audioEl.onended=()=>{URL.revokeObjectURL(url);jamMute(false)};audioEl.src=url;jamMute(true);const p=audioEl.play();if(p&&p.catch)p.catch(()=>jamMute(false))}
+function speakOut(text){stopSpeech();if(!text)return;if(!geminiVoice()){jamMute(true);Voice.speak(text,{voiceName:S.settings.voiceName,done:()=>jamMute(false)});return}
+  const ctl=new AbortController();ttsCtl=ctl;Gemini.speech(text,{signal:ctl.signal}).then(blob=>{if(ttsCtl!==ctl)return;ttsCtl=null;playBlob(blob)}).catch(e=>{if(e&&e.code==='cancelled')return;if(ttsCtl===ctl)ttsCtl=null;setStatus(geminiError(e,'voice'));Voice.speak(text,{voiceName:S.settings.voiceName})})}
+function geminiError(e,what){const code=e&&e.code;const fall=what==='voice'?' Using the device voice for now.':'';
+  return({rate_limited:'Gemini\'s free allowance is used up for now.'+fall,bad_key:'Gemini rejected the key — check it in settings.'+fall,no_key:'No Gemini key yet — add one in settings.'+fall,
+    no_voice:'The Gemini voice hasn\'t been created yet — settings → Voice.'+fall,network:'Couldn\'t reach Gemini — check the connection.'+fall})[code]||`Gemini couldn't do that (${(e&&e.message)||'unknown error'}).`+fall}
+const SILENT=(()=>{try{const h=new ArrayBuffer(44+800),v=new DataView(h);const w=(o,t)=>{for(let i=0;i<t.length;i++)v.setUint8(o+i,t.charCodeAt(i))};
+  w(0,'RIFF');v.setUint32(4,36+800,true);w(8,'WAVE');w(12,'fmt ');v.setUint32(16,16,true);v.setUint16(20,1,true);v.setUint16(22,1,true);v.setUint32(24,8000,true);v.setUint32(28,16000,true);v.setUint16(32,2,true);v.setUint16(34,16,true);w(36,'data');v.setUint32(40,800,true);
+  return URL.createObjectURL(new Blob([h],{type:'audio/wav'}))}catch(e){return null}})();
+function unlockAudio(){Voice.unlock(S.settings.voiceName);if(!audioEl||!SILENT||audioEl.dataset.unlocked)return;try{audioEl.src=SILENT;const p=audioEl.play();if(p&&p.then)p.then(()=>{audioEl.dataset.unlocked='1'},()=>{})}catch(e){}}
+const plain=t=>String(t||'').replace(/\*\*(.+?)\*\*/g,'$1').replace(/`([^`]+)`/g,'$1').replace(/^\s*[-•]\s+/gm,'').replace(/#+\s*/g,'');
+
+/* ===== the brains ===== */
+function route(){if(Gemini.key()&&!S.geminiBlocked)return 'gemini';if(S.sample)return 'claude';return 'guide'}
+const ROUTE_LABEL={gemini:'Gemini',claude:'Claude',guide:'Built-in guide'};
+async function askGemini(q,signal){
+  const contents=S.turns.slice(-12).map(t=>({role:t.role==='assistant'?'model':'user',parts:[{text:t.text}]}));contents.push({role:'user',parts:[{text:q}]});
+  const decl=TOOLS.map(t=>t.parameters?{name:t.name,description:t.description,parameters:t.parameters}:{name:t.name,description:t.description});
+  for(let round=0;round<7;round++){
+    const c=await Gemini.chatRound({system:systemPrompt(),contents,tools:decl,signal});contents.push(c);
+    const parts=c.parts||[];const calls=parts.filter(p=>p.functionCall);
+    if(!calls.length){const text=parts.filter(p=>typeof p.text==='string'&&!p.thought).map(p=>p.text).join('').trim();if(!text)throw{code:'empty_completion',message:'No text'};return text}
+    const responses=[];for(const p of calls){const fc=p.functionCall;let result;try{result=await runTool(fc.name,fc.args)}catch(e){result='Error: '+(e.message||e)}
+      responses.push({functionResponse:{name:fc.name,response:{result:typeof result==='string'?result:JSON.stringify(result).slice(0,6000)}}})}
+    contents.push({role:'user',parts:responses});if(signal&&signal.aborted)throw{code:'cancelled'}}
+  return 'Done.'}
+async function askClaude(q,signal,onText){
+  const turns=[];S.turns.slice(-10).forEach(t=>{const role=t.role==='assistant'?'assistant':'user';if(turns.length&&turns[turns.length-1].role===role)turns[turns.length-1].content+='\n'+t.text;else turns.push({role,content:t.text})});
+  const input=[{role:'user',content:systemPrompt()+'\n\nThe conversation follows. Answer the last message as the helper.'},{role:'assistant',content:'Understood.'}];
+  turns.forEach(t=>input.push(t));if(input[input.length-1].role==='user')input[input.length-1].content+='\n'+q;else input.push({role:'user',content:q});
+  const opts={signal,modelTier:'quick',onText,cache:false};
+  if(S.sampleTools){delete opts.cache;opts.tools=TOOLS.map(t=>({name:t.name,description:t.description,...(t.parameters?{inputSchema:t.parameters}:{}),execute:async a=>{const r=await runTool(t.name,a);return typeof r==='string'?r:JSON.stringify(r).slice(0,8000)}}))}
+  const r=await S.sample(input,opts);return r.text}
+
+/* ===== UI ===== */
+const el=(t,c,x)=>{const e=D.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e};
+const ICON_CHAT='<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path fill="currentColor" d="M12 3C6.9 3 3 6.5 3 10.8c0 2.4 1.2 4.5 3.2 5.9-.1 1.2-.6 2.6-1.6 3.6 2 0 3.7-.8 4.8-1.7.8.2 1.7.3 2.6.3 5.1 0 9-3.5 9-7.9S17.1 3 12 3Zm-4 9.3a1.3 1.3 0 1 1 0-2.6 1.3 1.3 0 0 1 0 2.6Zm4 0a1.3 1.3 0 1 1 0-2.6 1.3 1.3 0 0 1 0 2.6Zm4 0a1.3 1.3 0 1 1 0-2.6 1.3 1.3 0 0 1 0 2.6Z"/></svg>';
+const ICON_MIC='<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 15a3.5 3.5 0 0 0 3.5-3.5v-5a3.5 3.5 0 1 0-7 0v5A3.5 3.5 0 0 0 12 15Zm6-3.5a.9.9 0 1 0-1.8 0 4.2 4.2 0 0 1-8.4 0 .9.9 0 1 0-1.8 0 6 6 0 0 0 5.1 5.9V20H8.6a.9.9 0 1 0 0 1.8h6.8a.9.9 0 1 0 0-1.8h-2.5v-2.6a6 6 0 0 0 5.1-5.9Z"/></svg>';
+const fab=el('button','glh-fab');fab.type='button';fab.id='glhFab';fab.setAttribute('aria-label','Open the Guitar Lab helper');fab.innerHTML=ICON_CHAT+'<span>Help</span>';
+const panel=el('section','glh-panel');panel.id='glhPanel';panel.setAttribute('role','dialog');panel.setAttribute('aria-label','Guitar Lab helper');panel.hidden=true;
+panel.innerHTML=`<div class="glh-head"><div class="glh-title"><b>Lab helper</b><small id="glhRoute"></small></div>
+ <button type="button" class="glh-icon" id="glhSpeak" aria-pressed="false" title="Read replies aloud">🔈</button>
+ <button type="button" class="glh-icon" id="glhGear" aria-label="Helper settings" title="Settings">⚙︎</button>
+ <button type="button" class="glh-icon" id="glhClose" aria-label="Close helper">✕</button></div>
+<div class="glh-body" id="glhBody"><div class="glh-msgs" id="glhMsgs" aria-live="polite"></div><div class="glh-chips" id="glhChips"></div></div>
+<div class="glh-settings" id="glhSettings" hidden></div>
+<p class="glh-status" id="glhStatus" aria-live="polite"></p>
+<form class="glh-compose" id="glhForm"><button type="button" class="glh-mic" id="glhMic" aria-label="Hold to talk" title="Hold to talk">${ICON_MIC}</button>
+ <textarea id="glhInput" rows="1" placeholder="Ask, or say what to open…" aria-label="Message"></textarea>
+ <button type="submit" class="glh-send" id="glhSend" aria-label="Send">↑</button></form>`;
+D.body.append(fab,panel);
+const $=id=>D.getElementById(id);
+function setStatus(t){$('glhStatus').textContent=t||''}
+function renderRoute(){S.route=route();$('glhRoute').textContent=ROUTE_LABEL[S.route]+(S.settings.readAloud?' · voice on':'');$('glhSpeak').textContent=S.settings.readAloud?'🔊':'🔈';$('glhSpeak').setAttribute('aria-pressed',String(S.settings.readAloud))}
+function richText(container,text){container.replaceChildren();const lines=String(text).split(/\n+/);let ul=null;
+  lines.forEach(line=>{const li=line.match(/^\s*[-•*]\s+(.*)$/);const target=li?(ul||(ul=container.appendChild(el('ul')))).appendChild(el('li')):(ul=null,container.appendChild(el('p')));
+    const src=li?li[1]:line;src.split(/(\*\*[^*]+\*\*)/g).forEach(part=>{if(/^\*\*[^*]+\*\*$/.test(part))target.append(el('b','',part.slice(2,-2)));else if(part)target.append(D.createTextNode(part.replace(/^#+\s*/,'')))})})}
+function bubble(role,text){const b=el('div','glh-msg '+(role==='user'?'me':'ai'));if(role==='user')b.textContent=text;else richText(b,text);$('glhMsgs').append(b);scrollMsgs();return b}
+function note(t){if(!t)return;$('glhMsgs').append(el('div','glh-act',t));scrollMsgs()}
+const scrollMsgs=()=>{const m=$('glhBody');m.scrollTop=m.scrollHeight};
+const SUGGEST={overview:['What can I do here?','Which tool should I start with?','Open the chord jam'],explorer:['Show me Fmaj9 shapes','How do I find open-string shapes?','What do the tile labels mean?'],
+  voicings:['How do I edit a shape?','How do I save my own voicing?'],transLab:['Make a neo-soul fill from Cmaj7 to Am9','How do I slow a fill down?','What is Challenge mode?'],
+  harmonic:['What chord can follow G7?','How do I read the map colours?','How do I build a progression?'],jam:['How does the jam pick chords?','Set voicings to Advanced','The mic isn\'t working'],
+  harmonizer:['How do I type a melody?','What do the style tabs do?','Harmonize 3 2 1 in G'],ear:['How does the degree trainer work?','Start a harmony question'],rhythm:['How do I practise singing over a strum?','Set strum density to Busy']};
+function renderChips(){const c=$('glhChips');c.replaceChildren();if(S.turns.length>2)return;(SUGGEST[curTab()]||SUGGEST.overview).forEach(t=>{const b=el('button','glh-chip',t);b.type='button';b.addEventListener('click',()=>send(t));c.append(b)})}
+function greet(){if($('glhMsgs').childElementCount)return;bubble('assistant',`Hi! I'm the Guitar Lab helper. Ask how anything works, or tell me what to do: "show me Fmaj9 shapes", "open the chord jam", "switch to Full detail".`)}
+function openPanel(){S.open=true;panel.hidden=false;fab.classList.add('on');fab.setAttribute('aria-expanded','true');renderRoute();greet();renderChips();setTimeout(()=>{if(W.matchMedia('(pointer:fine)').matches)$('glhInput').focus()},60)}
+function closePanel(){S.open=false;panel.hidden=true;fab.classList.remove('on');fab.setAttribute('aria-expanded','false');stopSpeech();fab.focus()}
+fab.addEventListener('click',()=>{unlockAudio();S.open?closePanel():openPanel()});
+$('glhClose').addEventListener('click',closePanel);
+D.addEventListener('keydown',e=>{if(e.key==='Escape'&&S.open)closePanel()});
+$('glhSpeak').addEventListener('click',()=>{S.settings.readAloud=!S.settings.readAloud;saveSettings();if(S.settings.readAloud)unlockAudio();else stopSpeech();renderRoute()});
+$('glhGear').addEventListener('click',()=>{S.view=S.view==='settings'?'chat':'settings';$('glhSettings').hidden=S.view!=='settings';$('glhBody').hidden=S.view==='settings';$('glhForm').hidden=S.view==='settings';if(S.view==='settings')renderSettings()});
+const input=$('glhInput');
+input.addEventListener('input',()=>{input.style.height='auto';input.style.height=Math.min(120,input.scrollHeight)+'px'});
+input.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();$('glhForm').requestSubmit()}});
+$('glhForm').addEventListener('submit',e=>{e.preventDefault();if(S.busy){S.busy.abort();return}const t=input.value.trim();if(t)send(t)});
+D.addEventListener('click',e=>{const t=e.target.closest&&e.target.closest('#lab nav button[data-tab]');if(t&&S.open)setTimeout(renderChips,50)});
+
+let spokenTurn=false;
+async function send(q,{spoken=false}={}){
+  if(S.busy)return;spokenTurn=spoken;input.value='';input.style.height='auto';$('glhChips').replaceChildren();bubble('user',q);setStatus('');
+  const r=route();const ctl=new AbortController();S.busy=ctl;$('glhSend').textContent='■';$('glhSend').setAttribute('aria-label','Stop');
+  const wait=el('div','glh-msg ai glh-wait');wait.innerHTML='<i></i><i></i><i></i>';$('glhMsgs').append(wait);scrollMsgs();
+  let text='',live=null;
+  const finish=t=>{wait.remove();if(live)richText(live,t);else live=bubble('assistant',t);S.turns.push({role:'user',text:q},{role:'assistant',text:t});if(S.turns.length>30)S.turns.splice(0,S.turns.length-30);
+    if(S.settings.readAloud||spokenTurn)speakOut(Voice.speakable(plain(t)));};
+  try{
+    if(r==='gemini'){try{text=await askGemini(q,ctl.signal)}catch(e){if(e&&e.code==='network'){S.geminiBlocked=true;renderRoute();setStatus('Gemini can\'t be reached from here'+(S.sample?' — using Claude instead.':' — using the built-in guide.'));if(S.sample)text=await askClaude(q,ctl.signal,null);else{const o=await offline(q);text=typeof o==='string'?o:o.text}}else throw e}}
+    else if(r==='claude'){text=await askClaude(q,ctl.signal,({text:t})=>{if(!live){wait.remove();live=bubble('assistant','')}richText(live,t);scrollMsgs()})}
+    else{const o=await offline(q);text=typeof o==='string'?o:o.text;if(o&&o.go){finish(text);const b=el('button','glh-go','Take me to '+PAGES[o.go]+' →');b.type='button';b.addEventListener('click',()=>{goTo(o.go);renderChips()});$('glhMsgs').append(b);scrollMsgs();return}}
+    finish(text);
+  }catch(e){wait.remove();if(e&&e.code==='cancelled'){note('Stopped.');return}
+    const msg=r==='gemini'?geminiError(e):(e&&e.code==='not_granted'?'Claude isn\'t allowed for this page, so I\'ll use the built-in guide.':e&&e.code==='rate_limited'?'Too many questions at once — try again in a moment.':'Something went wrong ('+((e&&(e.message||e.code))||'error')+').');
+    if(r==='claude'&&e&&e.code==='not_granted'){S.sample=null;renderRoute()}
+    const o=await offline(q).catch(()=>null);bubble('assistant',msg+(o?'\n\n'+(typeof o==='string'?o:o.text):''));}
+  finally{S.busy=null;$('glhSend').textContent='↑';$('glhSend').setAttribute('aria-label','Send');renderChips()}
+}
+
+/* hold to talk */
+const mic=$('glhMic');
+function holdStart(e){if(e)e.preventDefault();if(S.listening||S.busy)return;stopSpeech();unlockAudio();mic.classList.add('on');setStatus('Listening… let go to send.');
+  const lang=/^en/i.test(navigator.language||'')?navigator.language:'en-NZ';let heard='';
+  S.listening=Voice.listen({lang,onHear:t=>{heard=t;input.value=t},onDone:t=>{S.listening=null;mic.classList.remove('on');setStatus('');const q=(t||heard).trim();if(q)send(q,{spoken:true});else setStatus('Heard nothing — hold, speak, then let go.')},
+    onError:k=>{S.listening=null;mic.classList.remove('on');setStatus(({blocked:S.sample?'The mic is blocked inside the Claude app. Open the GitHub Pages copy to talk, or type here.':'The mic is blocked. Allow microphone access for this page and try again.',
+      silence:'Heard nothing — hold, speak, then let go.',nomic:'No microphone found.',unsupported:'This browser can\'t listen. Safari or Chrome can — or type your question.'})[k]||'The recogniser stopped — try again.')}});
+  if(!S.listening)mic.classList.remove('on')}
+function holdEnd(e){if(e)e.preventDefault();if(S.listening)S.listening.stop()}
+mic.addEventListener('pointerdown',e=>{try{mic.setPointerCapture(e.pointerId)}catch(x){}holdStart(e)});
+mic.addEventListener('pointerup',holdEnd);mic.addEventListener('pointercancel',holdEnd);
+mic.addEventListener('keydown',e=>{if((e.key===' '||e.key==='Enter')&&!e.repeat){holdStart(e)}});mic.addEventListener('keyup',e=>{if(e.key===' '||e.key==='Enter')holdEnd(e)});
+if(!Voice.canListen)mic.title='This browser can\'t listen — Safari or Chrome can';
+
+/* settings (same controls as Gooby Goober's Gemini key and Vocal mode) */
+function renderSettings(){const box=$('glhSettings');box.replaceChildren();
+  const grp=t=>{const g=el('div','glh-group');g.append(el('h4','',t));box.append(g);return g};
+  const g1=grp('Gemini key (free)');const row=el('div','glh-row');const inp=el('input','glh-in');inp.type='password';inp.placeholder='Gemini API key (AIza…)';inp.autocomplete='off';inp.spellcheck=false;inp.setAttribute('aria-label','Gemini API key');
+  const save=el('button','glh-btn primary','Save');save.type='button';save.addEventListener('click',()=>{if(!inp.value.trim())return;Gemini.setKey(inp.value);inp.value='';S.geminiBlocked=false;renderRoute();renderSettings()});row.append(inp,save);g1.append(row);
+  g1.append(el('p','glh-note',Gemini.key()?'A Gemini key is saved in this browser.':'No Gemini key saved.'));
+  if(Gemini.key()){const rm=el('button','glh-btn text','Remove key');rm.type='button';rm.addEventListener('click',()=>{Gemini.setKey('');renderRoute();renderSettings()});g1.append(rm)}
+  g1.append(el('p','glh-note','Free from aistudio.google.com → Get API key. The helper answers with Gemini and can speak with a voice you design. The key stays in this browser and is sent only to Google. '+(S.sample?'Inside the Claude app Gemini can\'t be reached, so the helper uses Claude here.':'Without a key the helper answers from its built-in guide.')));
+  const g2=grp('Voice');
+  const sw=el('label','glh-switch');const cb=el('input');cb.type='checkbox';cb.checked=!!S.settings.readAloud;cb.addEventListener('change',()=>{S.settings.readAloud=cb.checked;saveSettings();if(cb.checked)unlockAudio();else stopSpeech();renderRoute()});sw.append(cb,el('span','','Read every reply aloud (spoken questions always get a spoken answer)'));g2.append(sw);
+  const seg=el('div','glh-seg');[['gemini','Gemini voice'],['device','Device voice']].forEach(([v,t])=>{const b=el('button','',t);b.type='button';b.setAttribute('aria-pressed',String(S.settings.voiceEngine===v));b.addEventListener('click',()=>{S.settings.voiceEngine=v;saveSettings();renderSettings()});seg.append(b)});g2.append(seg);
+  const st=el('p','glh-note');st.id='glhGemStatus';
+  if(S.settings.voiceEngine==='gemini'){g2.append(el('p','glh-sub','Describe her voice'));const ta=el('textarea','glh-in glh-ta');ta.rows=3;ta.setAttribute('aria-label','Describe the voice');ta.value=(Gemini.voice()||{}).prompt||Gemini.DEFAULT_PROMPT;
+    const btns=el('div','glh-row');const make=el('button','glh-btn primary','Create voice');make.type='button';make.disabled=!Gemini.key();
+    make.addEventListener('click',async()=>{unlockAudio();make.disabled=true;st.textContent='Designing her voice… this takes a few seconds.';try{const r=await Gemini.design(ta.value);st.textContent='Voice ready — this is her.';if(r.sample)playBlob(r.sample);else speakOut(Voice.speakable('Hi! I\'m the Guitar Lab helper. Ask me how anything works.'))}catch(e){st.textContent=geminiError(e,'design')}finally{make.disabled=!Gemini.key()}});
+    const hear=el('button','glh-btn text','Hear her');hear.type='button';hear.addEventListener('click',()=>{unlockAudio();speakOut(Voice.speakable('Hi! I\'m the Guitar Lab helper. Ask me how anything works.'))});
+    btns.append(make,hear);g2.append(ta,btns,st);st.textContent=!Gemini.key()?'Add a Gemini key first.':(Gemini.voice()||{}).id?'Her voice is ready. Create voice again to remake it from the description.':'No voice designed yet — the device voice speaks until you create one.'}
+  else{const sel=el('select','glh-in');sel.setAttribute('aria-label','Device voice');const fill=()=>{sel.replaceChildren();const{list}=Voice.choices();if(!list.length)sel.append(new Option('Default voice',''));list.forEach(v=>sel.append(new Option(v.name+' · '+v.lang,v.name)));sel.value=S.settings.voiceName||(list[0]||{}).name||''};fill();try{W.speechSynthesis.onvoiceschanged=fill}catch(e){}
+    sel.addEventListener('change',()=>{S.settings.voiceName=sel.value;saveSettings()});const hear=el('button','glh-btn text','Hear it');hear.type='button';hear.addEventListener('click',()=>{unlockAudio();speakOut(Voice.speakable('Hi! I\'m the Guitar Lab helper.'))});const row2=el('div','glh-row');row2.append(sel,hear);g2.append(row2);
+    if(!Voice.canSpeak)g2.append(el('p','glh-note','This browser has no speech voice.'))}
+  const g3=grp('Chat');const clr=el('button','glh-btn','Clear the conversation');clr.type='button';clr.addEventListener('click',()=>{S.turns=[];$('glhMsgs').replaceChildren();greet();$('glhGear').click()});g3.append(clr);
+  const done=el('button','glh-btn primary glh-done','Done');done.type='button';done.addEventListener('click',()=>$('glhGear').click());box.append(done)}
+
+/* Claude inside the Claude app */
+(async()=>{try{if(!W.claude||!W.claude.use)return;const s=await W.claude.use('sample');if(!s)return;S.sample=s;try{const l=await s.limits();S.sampleTools=!!(l&&l.tools)}catch(e){}renderRoute()}catch(e){}})();
+renderRoute();
+W.GuitarLabHelper={S,Gemini,Voice,TOOLS,runTool,offline,send,openPanel,closePanel,controls,pageContext,systemPrompt,parseChord};
+})();
+</script>
+
 </body></html>
