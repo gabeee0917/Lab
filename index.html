@@ -99,14 +99,13 @@ p { margin: 0; }
 .mic.err .dot { background: var(--warn); }
 @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
-.status { font-size: 13px; color: var(--ink-2); margin: -6px 2px 12px; min-height: 0; }
+.status { font-size: 13px; color: var(--ink-2); margin: -6px 2px 12px; }
 .status.warn { color: var(--warn); }
 .heard { font-style: italic; }
 
 /* Cards */
 .card { background: var(--surface); border-radius: 20px; padding: 16px; margin-bottom: 10px; }
 .label { font-size: 13px; font-weight: 500; color: var(--ink-2); }
-.key-row { display: flex; align-items: flex-end; justify-content: space-between; gap: 10px; }
 .key-name { font-size: 34px; font-weight: 700; letter-spacing: -0.025em; line-height: 1.1; margin-top: 2px; }
 .via { font-size: 13px; color: var(--ink-2); margin-top: 4px; }
 .via b { color: var(--accent); font-weight: 600; }
@@ -122,21 +121,12 @@ p { margin: 0; }
   gap: 1px;
   min-width: 0;
 }
-.pchip b { font-family: var(--font-round); font-size: 28px; font-weight: 600; line-height: 1.1; }
-.pchip b sup { font-size: 13px; font-weight: 600; margin-left: 1px; color: var(--ink-2); }
-.pchip i { font-style: normal; font-size: 14px; font-weight: 600; color: var(--ink-2); white-space: nowrap; overflow: hidden; }
+.pchip b { font-family: var(--font-round); font-size: 28px; font-weight: 600; line-height: 1.1; white-space: nowrap; }
+.pchip b sup { font-size: 12px; font-weight: 600; margin-left: 1px; color: var(--ink-2); }
+.pchip small { font-size: 11px; font-weight: 600; color: var(--ink-2); }
+.pchip i { font-style: normal; font-size: 13px; font-weight: 600; color: var(--ink-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 0 3px; }
 .prog-name { font-size: 13px; color: var(--ink-2); margin-top: 10px; }
-.tag {
-  display: inline-block;
-  font-size: 11px;
-  font-weight: 600;
-  padding: 1px 7px;
-  border-radius: 999px;
-  background: var(--warn-tint);
-  color: var(--warn);
-  margin-left: 6px;
-  vertical-align: 1px;
-}
+.prog-name b { color: var(--ink); font-weight: 600; }
 
 .actions { display: flex; gap: 8px; margin-top: 14px; }
 .btn { height: 46px; border-radius: 12px; font-size: 16px; font-weight: 600; padding: 0 18px; }
@@ -144,11 +134,27 @@ p { margin: 0; }
 .btn.tint { background: var(--accent-tint); color: var(--accent); }
 .btn:disabled { opacity: 0.35; cursor: default; }
 
+/* Example chords */
+.ex {
+  font-family: var(--font-round);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--accent);
+  background: var(--accent-tint);
+  border-radius: 9px;
+  padding: 5px 9px;
+  margin-top: 7px;
+  display: inline-block;
+}
+.ex .arr { color: var(--ink-3); font-weight: 500; margin: 0 2px; }
+.ex-note { font-size: 13px; color: var(--ink-2); margin-top: 4px; line-height: 1.4; }
+
 /* Modulation options */
 .group-head { display: flex; align-items: baseline; justify-content: space-between; padding: 12px 4px 7px; }
 .group-title { font-size: 13px; color: var(--ink-2); }
 .link { font-size: 14px; font-weight: 600; color: var(--accent); }
 .list { background: var(--surface); border-radius: 16px; overflow: hidden; }
+.list + .list { margin-top: 10px; }
 .opt {
   display: flex;
   align-items: center;
@@ -163,6 +169,8 @@ p { margin: 0; }
 .opt:active { background: var(--seg-bg); }
 .num {
   flex: none;
+  align-self: flex-start;
+  margin-top: 2px;
   width: 26px;
   height: 26px;
   border-radius: 50%;
@@ -178,7 +186,6 @@ p { margin: 0; }
 .opt-move { font-size: 13px; color: var(--ink-2); margin-top: 1px; }
 .opt-move b { color: var(--ink); font-weight: 600; }
 .chev { color: var(--ink-3); font-size: 20px; flex: none; }
-.foot { font-size: 13px; color: var(--ink-2); padding: 7px 4px 0; }
 
 /* Settings + help */
 .row { display: flex; align-items: center; gap: 12px; padding: 11px 14px; min-height: 48px; position: relative; cursor: pointer; }
@@ -194,7 +201,12 @@ p { margin: 0; }
 .row[aria-checked="true"] .switch { background: var(--switch-on); }
 .row[aria-checked="true"] .switch::after { transform: translateX(20px); }
 
-.cmds { display: grid; grid-template-columns: auto 1fr; gap: 6px 14px; padding: 12px 14px; font-size: 14px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { border-radius: 999px; background: var(--seg-bg); color: var(--ink-2); font-size: 14px; font-weight: 500; padding: 7px 13px; }
+.chip.on { background: var(--accent); color: var(--accent-ink); }
+.note { font-size: 13px; color: var(--ink-2); padding: 7px 4px 0; }
+
+.cmds { display: grid; grid-template-columns: auto 1fr; gap: 6px 14px; padding: 12px 14px; font-size: 14px; margin: 0; }
 .cmds dt { font-weight: 600; white-space: nowrap; }
 .cmds dd { margin: 0; color: var(--ink-2); }
 
@@ -222,6 +234,7 @@ p { margin: 0; }
     <div class="label">Key</div>
     <div class="key-name" id="key-name"></div>
     <div class="via" id="via"></div>
+    <div id="via-ex"></div>
   </section>
 
   <section class="card" id="c-prog">
@@ -236,10 +249,14 @@ p { margin: 0; }
 
   <div class="group-head"><span class="group-title">Modulate to</span><button class="link" id="shuffle">Shuffle</button></div>
   <div class="list" id="opts"></div>
-  <p class="foot">Tap one when you're ready to move. Work out the bridge yourself.</p>
+  <div class="list" id="ex-toggle"></div>
 
   <div class="group-head"><span class="group-title">Settings</span></div>
   <div class="list" id="settings"></div>
+
+  <div class="group-head"><span class="group-title">Progression styles</span></div>
+  <div class="chips" id="styles"></div>
+  <p class="note" id="styles-note"></p>
 
   <div class="group-head"><span class="group-title">Voice and keys</span></div>
   <div class="list">
@@ -248,13 +265,14 @@ p { margin: 0; }
       <dt>"option 2"</dt><dd>Take that modulation · 1, 2, 3</dd>
       <dt>"next key"</dt><dd>Take a random one · K</dd>
       <dt>"shuffle"</dt><dd>New modulation options · S</dd>
+      <dt>"show examples"</dt><dd>Examples on or off · E</dd>
       <dt>"back"</dt><dd>Undo the last change · ←</dd>
     </dl>
   </div>
 </div>
 
 <script>
-/* ---------- theory engine ---------- */
+/* ---------- spelling + keys ---------- */
 const LET = ['C','D','E','F','G','A','B'];
 const NAT = [0,2,4,5,7,9,11];
 const MAJ = [0,2,4,5,7,9,11];
@@ -280,162 +298,462 @@ function key(pc, mode) {
 }
 const ALL_KEYS = [];
 for (let i = 0; i < 12; i++) { ALL_KEYS.push(key(i, 'maj')); ALL_KEYS.push(key(i, 'min')); }
+const both = pc => [key(pc, 'maj'), key(pc, 'min')];
+const ks = K => K.root + (K.mode === 'min' ? 'm' : '');
 
+/* ---------- chord codes ----------
+   "6"      degree, quality from the key
+   "b7"     flat degree, "#4" sharp degree
+   "4.m"    quality override: m M dim dim7 aug sus sus2 7 7sus m7 maj7 6 m6 add9 mM7
+   "5/6"    secondary dominant (5 of 6)
+   "1_3"    bass note: 1 chord over the 3
+*/
 const QMAJ = { '1':'M','2':'m','3':'m','4':'M','5':'M','6':'m','7':'dim','b2':'M','b3':'M','b6':'M','b7':'M' };
 const QMIN = { '1':'m','2':'dim','b3':'M','4':'m','5':'M','b6':'M','b7':'M','b2':'M' };
+const TRIAD_OV = { m: 'm', M: 'M', dim: 'dim' };
+const EXT_Q = { dim7: 'dim', aug: 'aug', sus: 'M', sus2: 'M', '7': 'M', '7sus': 'M', m7: 'm', maj7: 'M', '6': 'M', m6: 'm', add9: 'M', mM7: 'm' };
+const NAME_SUF = { dim7: 'dim7', aug: '+', sus: 'sus4', sus2: 'sus2', '7': '7', '7sus': '7sus4', m7: 'm7', maj7: 'maj7', '6': '6', m6: 'm6', add9: 'add9', mM7: 'm(maj7)' };
+const SUP = { m: 'm', M: 'maj', dim: '°', dim7: '°7', aug: '+', sus: 'sus4', sus2: 'sus2', '7': '7', '7sus': '7sus4', m7: 'm7', maj7: 'maj7', '6': '6', m6: 'm6', add9: 'add9', mM7: 'm(maj7)' };
+const TRI_SUF = { M: '', m: 'm', dim: 'dim', aug: '+' };
+
 function cc(code, K) {
-  let m = code.match(/^5\/(.+)$/);
-  if (m) { const t = cc(m[1], K); return { l: mod(t.l + 4, 7), pc: mod(t.pc + 7), q: 'M', push: true }; }
-  m = code.match(/^(b?)([1-7])([mM]?)$/);
-  const flat = m[1] === 'b', n = +m[2], ov = m[3], base = (flat ? 'b' : '') + n;
-  const def = (K.mode === 'maj' ? QMAJ : QMIN)[base];
-  return { l: mod(K.l + n - 1, 7), pc: mod(K.pc + MAJ[n - 1] - (flat ? 1 : 0)), q: ov === 'm' ? 'm' : ov === 'M' ? 'M' : def, push: false };
+  const [main, bassC] = code.split('_');
+  const [deg, qual] = main.split('.');
+  let ch;
+  const sm = deg.match(/^5\/(.+)$/);
+  if (sm) {
+    const t = cc(sm[1], K);
+    ch = { l: mod(t.l + 4, 7), pc: mod(t.pc + 7), q: 'M', sec: true, base: deg };
+  } else {
+    const m = deg.match(/^([b#]?)([1-7])$/);
+    const acc = m[1] === 'b' ? -1 : m[1] === '#' ? 1 : 0, n = +m[2];
+    const def = acc === 1 ? 'dim' : ((K.mode === 'maj' ? QMAJ : QMIN)[deg] || 'M');
+    ch = { l: mod(K.l + n - 1, 7), pc: mod(K.pc + MAJ[n - 1] + acc), q: def, sec: false, base: deg };
+  }
+  if (qual) {
+    if (TRIAD_OV[qual]) ch.q = TRIAD_OV[qual];
+    else { ch.qx = qual; ch.q = EXT_Q[qual]; }
+    ch.ov = qual;
+  }
+  if (bassC) { const b = cc(bassC, K); ch.bass = { l: b.l, pc: b.pc }; ch.bassCode = bassC; }
+  return ch;
 }
-const disp = c => c.replace(/b/g, '♭').replace(/[mM]$/, '');
+function sev(ch, s7) {
+  if (ch.q === 'dim') return 'm7♭5';
+  if (ch.q === 'm') return 'm7';
+  if (s7 === 'dom') return '7';
+  return (ch.base === '5' || ch.base === 'b7') ? '7' : 'maj7';
+}
+function chordName(ch, s7) {
+  let suf;
+  if (ch.qx) suf = NAME_SUF[ch.qx];
+  else if (ch.sec) suf = '7';
+  else if (s7) suf = sev(ch, s7);
+  else suf = TRI_SUF[ch.q];
+  return spell(ch.l, ch.pc) + suf + (ch.bass ? '/' + spell(ch.bass.l, ch.bass.pc) : '');
+}
+const sym = s => s.replace(/b/g, '♭').replace(/#/g, '♯');
 function degHTML(code) {
-  const m = code.match(/([mM])$/);
-  return disp(code) + (m ? `<sup>${m[1] === 'm' ? 'm' : 'maj'}</sup>` : '');
+  const [main, bassC] = code.split('_');
+  const [deg, qual] = main.split('.');
+  return `<b>${sym(deg)}${qual ? `<sup>${SUP[qual]}</sup>` : ''}</b>${bassC ? `<small>over ${sym(bassC)}</small>` : ''}`;
 }
-const TRI_SUF = { M: '', m: 'm', dim: 'dim' };
-const nm = ch => spell(ch.l, ch.pc) + (ch.push ? '7' : TRI_SUF[ch.q]);
+function lbl(code) {
+  const [deg, qual] = code.split('.');
+  const pre = qual === 'm' ? 'minor ' : qual === 'M' ? 'major ' : '';
+  return pre + sym(deg);
+}
 function diatonic(K) {
-  return (K.mode === 'maj' ? ['1','2','3','4','5','6','7'] : ['1','2','b3','4','5m','b6','b7']).map(c => ({ code: c, ch: cc(c, K) }));
+  return (K.mode === 'maj' ? ['1','2','3','4','5','6','7'] : ['1','2','b3','4','5.m','b6','b7']).map(c => ({ code: c, ch: cc(c, K) }));
 }
 const same = (a, b) => a.pc === b.pc && a.q === b.q;
 const relMaj = K => K.mode === 'maj' ? K.pc : mod(K.pc + 3);
 function fifthsDist(A, B) { const a = mod(relMaj(A) * 7), b = mod(relMaj(B) * 7), d = Math.abs(a - b); return Math.min(d, 12 - d); }
 const close = (A, B) => fifthsDist(A, B) <= 1;
 
-// Is there a chord in `from` that works as a set-up chord in Y?
-const SC = { maj: { '2': 3, '4': 3, '6': 2, '1': 1, '3': 1 }, min: { '4': 3, 'b6': 3, '2': 2, 'b3': 1, 'b7': 1, '1': 0.5 } };
-function hasPivot(from, Y, minScore) {
-  const S2 = SC[Y.mode], yd = diatonic(Y);
-  return from.some(f => yd.some(y => S2[y.code] && S2[y.code] >= (minScore || 0) && same(f.ch, y.ch)));
-}
-function triTones(K) {
+/* ---------- chord-name helpers for examples ---------- */
+const tri = (l, pc, q) => spell(l, pc) + TRI_SUF[q];
+const I = Y => tri(Y.l, Y.pc, Y.mode === 'maj' ? 'M' : 'm');
+const V = Y => spell(Y.l + 4, Y.pc + 7);
+const V7 = Y => V(Y) + '7';
+const IV = Y => tri(Y.l + 3, Y.pc + 5, Y.mode === 'maj' ? 'M' : 'm');
+const two = Y => spell(Y.l + 1, Y.pc + 2) + (Y.mode === 'maj' ? 'm7' : 'm7♭5');
+function triNotes(K) {
   const t3 = K.mode === 'maj' ? 4 : 3;
-  return [K.pc, mod(K.pc + t3), mod(K.pc + 7)];
+  return [[K.l, K.pc], [K.l + 2, K.pc + t3], [K.l + 4, K.pc + 7]].map(([l, p]) => ({ pc: mod(p), name: spell(l, p) }));
 }
 
-/* ---------- modulation moves (prompts only, no chords given) ---------- */
+// A chord from `from` that is a good set-up chord in Y, spelled the way Y spells it.
+const SC = { maj: { '2': 3, '4': 3, '6': 2, '1': 1, '3': 1 }, min: { '4': 3, 'b6': 3, '2': 2, 'b3': 1, 'b7': 1, '1': 0.5 } };
+function choosePivot(from, Y, minScore) {
+  const S2 = SC[Y.mode], yd = diatonic(Y), c = [];
+  for (const f of from) for (const y of yd) {
+    const s = S2[y.code];
+    if (s && s >= (minScore || 0) && same(f.ch, y.ch)) c.push({ f, y, s });
+  }
+  if (!c.length) return null;
+  const good = c.filter(x => x.s >= 2);
+  const p = pick(good.length ? good : c);
+  return { name: tri(p.y.ch.l, p.f.ch.pc, p.f.ch.q), old: p.f.code, neu: p.y.code };
+}
+const borrowedFrom = X => (X.mode === 'maj' ? ['b3', '4.m', 'b6', 'b7', '5.m'] : ['4.M', 'b2', '1.M']).map(c => ({ code: c, ch: cc(c, X) }));
+const anyKey = X => ALL_KEYS.filter(Y => Y.id !== X.id);
+const updown = (X, Y) => mod(Y.pc - X.pc) <= 6 ? 'up' : 'down';
+
+/* ---------- modulation moves ----------
+   tier: core (always), color (needs Chromatic chords on), adv (needs Advanced moves on)
+   ex(X, Y) gives the worked example: chords + one-line note. */
 const TECH = {
   pivot: {
-    name: 'Pivot chord',
+    name: 'Pivot chord', tier: 'core',
     hint: () => 'Shared chord, then 5 → 1',
     dests: X => X.mode === 'maj'
-      ? [key(X.pc + 7, 'maj'), key(X.pc + 5, 'maj'), key(X.pc + 2, 'min'), key(X.pc + 4, 'min')]
-      : [key(X.pc + 5, 'min'), key(X.pc + 7, 'min'), key(X.pc + 8, 'maj'), key(X.pc + 10, 'maj')],
-    ok: (X, Y) => hasPivot(diatonic(X), Y)
+      ? [key(X.pc + 7, 'maj'), key(X.pc + 5, 'maj'), key(X.pc + 2, 'min'), key(X.pc + 4, 'min'), key(X.pc + 9, 'min')]
+      : [key(X.pc + 5, 'min'), key(X.pc + 7, 'min'), key(X.pc + 8, 'maj'), key(X.pc + 10, 'maj'), key(X.pc + 3, 'maj')],
+    ok: (X, Y) => !!choosePivot(diatonic(X), Y),
+    ex(X, Y) {
+      const p = choosePivot(diatonic(X), Y);
+      return { chords: [p.name, V7(Y), I(Y)], note: `${p.name} is the ${lbl(p.old)} in ${ks(X)} and the ${lbl(p.neu)} in ${ks(Y)}.` };
+    }
   },
   dominant: {
-    name: 'Dominant approach',
-    hint: () => 'New 5 → 1, or 2–5–1',
-    dests: X => ALL_KEYS.filter(Y => Y.id !== X.id),
-    ok: () => true
+    name: 'Dominant approach', tier: 'core',
+    hint: () => 'New 5 → 1',
+    dests: anyKey,
+    ex: (X, Y) => ({ chords: [V7(Y), I(Y)], note: `${V7(Y)} is the 5 of ${ks(Y)}.` })
+  },
+  twofive: {
+    name: '2–5–1 approach', tier: 'core',
+    hint: () => '2 → 5 → 1 in the new key',
+    dests: anyKey,
+    ex: (X, Y) => ({ chords: [two(Y), V7(Y), I(Y)], note: `The 2 and 5 of ${ks(Y)}. Works from any key.` })
   },
   truck: {
-    name: 'Truck driver',
-    sameProg: true,
+    name: 'Truck driver', tier: 'core', sameProg: true,
     hint: (X, Y) => `Same loop, ${mod(Y.pc - X.pc) === 1 ? 'half' : 'whole'} step up`,
     dests: X => [key(X.pc + 1, X.mode), key(X.pc + 2, X.mode)],
-    ok: () => true
+    ex: (X, Y) => ({ chords: [V7(Y), I(Y)], note: `${V7(Y)} is an optional run-up. Then play the same loop from ${I(Y)}.` })
   },
-  relative: {
-    name: 'Relative switch',
-    needs: 'minor',
-    hint: () => 'Same notes, new home',
-    dests: X => [X.mode === 'maj' ? key(X.pc - 3, 'min') : key(X.pc + 3, 'maj')],
-    ok: () => true
+  direct: {
+    name: 'Direct jump', tier: 'core',
+    hint: () => 'Finish the phrase, start in the new key',
+    dests: anyKey,
+    ex: (X, Y) => ({ chords: [I(X), I(Y)], note: `Cadence on ${I(X)}, leave a beat, start the next phrase on ${I(Y)}.` })
   },
-  parallel: {
-    name: 'Parallel switch',
-    needs: 'minor',
-    hint: X => X.mode === 'maj' ? 'Same 1, lights down' : 'Same 1, lights up',
-    dests: X => [key(X.pc, X.mode === 'maj' ? 'min' : 'maj')],
-    ok: () => true
+  plagal: {
+    name: 'Plagal approach', tier: 'core',
+    hint: () => 'New 4 → 1, skip the 5',
+    dests: anyKey,
+    ex: (X, Y) => ({ chords: [IV(Y), I(Y)], note: `${IV(Y)} is the 4 of ${ks(Y)}. Softer than a 5 → 1.` })
   },
-  borrowed: {
-    name: 'Borrowed pivot',
-    needs: 'color',
-    hint: () => 'A borrowed chord is the door',
-    dests: X => ALL_KEYS.filter(Y => Y.pc !== X.pc && !close(X, Y)),
-    ok: (X, Y) => {
-      const codes = X.mode === 'maj' ? ['b3', '4m', 'b6', 'b7', '5m'] : ['4M', 'b2', '1M'];
-      return hasPivot(codes.map(c => ({ code: c, ch: cc(c, X) })), Y, 2);
+  sus: {
+    name: 'Sus approach', tier: 'core',
+    hint: () => 'New 5sus4 → 5 → 1',
+    dests: anyKey,
+    ex: (X, Y) => ({ chords: [V(Y) + '7sus4', V7(Y), I(Y)], note: `The sus floats with no 3rd, then the 3rd drops in and pulls to ${I(Y)}.` })
+  },
+  sequence: {
+    name: 'Sequence', tier: 'core',
+    hint: (X, Y) => `Repeat a 2–5 a whole step ${updown(X, Y)}`,
+    dests: X => [...both(X.pc + 2), ...both(X.pc - 2)],
+    ex: (X, Y) => ({ chords: [two(X), V7(X), two(Y), V7(Y), I(Y)], note: `2–5 in ${ks(X)}, then the same shape a whole step ${updown(X, Y)}, landing in ${ks(Y)}.` })
+  },
+  pedal: {
+    name: 'Pedal point', tier: 'core',
+    hint: () => 'Hold a shared bass note',
+    dests: X => triNotes(X).flatMap(t => both(t.pc - 7)).filter(Y => Y.id !== X.id),
+    ex(X, Y) {
+      const p = V(Y);
+      return { chords: [I(X), `${IV(Y)}/${p}`, V7(Y), I(Y)], note: `Hold ${p} in the bass. It's in ${I(X)} and it's the 5 of ${ks(Y)}.` };
     }
   },
   common: {
-    name: 'Common tone',
+    name: 'Common tone', tier: 'core',
     hint: () => 'Hold the note both 1 chords share',
     dests: X => ALL_KEYS.filter(Y => [3, 4, 8, 9].includes(mod(Y.pc - X.pc)) && !close(X, Y)),
-    ok: (X, Y) => { const b = triTones(Y); return triTones(X).some(p => b.includes(p)); }
+    ok: (X, Y) => { const b = triNotes(Y).map(t => t.pc); return triNotes(X).some(t => b.includes(t.pc)); },
+    ex(X, Y) {
+      const b = triNotes(Y).map(t => t.pc), held = triNotes(X).find(t => b.includes(t.pc)).name;
+      return { chords: [I(X), I(Y)], note: `Hold ${held} on top. It's in both ${I(X)} and ${I(Y)}; move everything else.` };
+    }
+  },
+  slide: {
+    name: 'Chromatic slide', tier: 'core',
+    hint: () => 'Slide into the new 1 by a half step',
+    dests: anyKey,
+    ex(X, Y) {
+      const up = Math.random() < 0.5, q = Y.mode === 'maj' ? 'M' : 'm';
+      const c = up ? tri(Y.l + 1, Y.pc + 1, q) : tri(Y.l - 1, Y.pc - 1, q);
+      return { chords: [c, I(Y)], note: `Same chord shape, slid ${up ? 'down' : 'up'} a half step into ${I(Y)}.` };
+    }
+  },
+  relative: {
+    name: 'Relative switch', tier: 'core', needs: 'minor',
+    hint: () => 'Same notes, new home',
+    dests: X => [X.mode === 'maj' ? key(X.pc - 3, 'min') : key(X.pc + 3, 'maj')],
+    ex(X, Y) {
+      const set = Y.mode === 'min' ? IV(Y) : tri(Y.l + 1, Y.pc + 2, 'm');
+      return { chords: [set, V7(Y), I(Y)], note: `${set} is in both keys. ${V7(Y)} turns ${I(Y)} into home.` };
+    }
+  },
+  parallel: {
+    name: 'Parallel switch', tier: 'core', needs: 'minor',
+    hint: X => X.mode === 'maj' ? 'Same 1, lights down' : 'Same 1, lights up',
+    dests: X => [key(X.pc, X.mode === 'maj' ? 'min' : 'maj')],
+    ex: (X, Y) => ({ chords: [IV(Y), V7(Y), I(Y)], note: `${IV(Y)} is borrowed from ${ks(Y)}, then 5 → 1.` })
+  },
+  chain: {
+    name: 'Dominant chain', tier: 'color',
+    hint: () => '5 of 5 → 5 → 1',
+    dests: anyKey,
+    ex: (X, Y) => {
+      const ff = spell(Y.l + 1, Y.pc + 2) + '7';
+      return { chords: [ff, V7(Y), I(Y)], note: `${ff} pulls to ${V7(Y)}, which pulls to ${I(Y)}.` };
+    }
+  },
+  backdoor: {
+    name: 'Backdoor', tier: 'color',
+    hint: () => 'Minor 4 → ♭7 → 1',
+    dests: X => ALL_KEYS.filter(Y => Y.mode === 'maj' && Y.id !== X.id),
+    ex: (X, Y) => {
+      const iv = tri(Y.l + 3, Y.pc + 5, 'm'), b7 = spell(Y.l + 6, Y.pc + 10) + '7';
+      return { chords: [iv, b7, I(Y)], note: `Sneaks into ${I(Y)} from the ♭7 instead of the 5.` };
+    }
+  },
+  borrowed: {
+    name: 'Borrowed pivot', tier: 'color',
+    hint: () => 'A borrowed chord is the door',
+    dests: X => ALL_KEYS.filter(Y => Y.pc !== X.pc && !close(X, Y)),
+    ok: (X, Y) => !!choosePivot(borrowedFrom(X), Y, 2),
+    ex(X, Y) {
+      const p = choosePivot(borrowedFrom(X), Y, 2);
+      return { chords: [p.name, V7(Y), I(Y)], note: `${p.name} is borrowed in ${ks(X)} (the ${lbl(p.old)}) but plain in ${ks(Y)} (the ${lbl(p.neu)}).` };
+    }
+  },
+  tritone: {
+    name: 'Tritone sub', tier: 'color',
+    hint: () => '2 → ♭2 → 1, bass slides down',
+    dests: anyKey,
+    ex: (X, Y) => {
+      const t = spell(Y.l + 1, Y.pc + 1) + '7';
+      return { chords: [two(Y), t, I(Y)], note: `${t} stands in for ${V7(Y)}. The bass slides down a half step to ${I(Y)}.` };
+    }
+  },
+  deceptive: {
+    name: 'Deceptive turn', tier: 'color',
+    hint: () => 'Old 5 lands on ♭6, call it home',
+    dests: X => [key(X.pc + 8, 'maj')],
+    ex: (X, Y) => ({ chords: [V7(X), I(Y), V7(Y), I(Y)], note: `${V7(X)} promises ${I(X)} but lands on ${I(Y)}. Its own 5 confirms the new home.` })
+  },
+  dim7: {
+    name: 'Diminished pivot', tier: 'adv',
+    hint: () => 'Respell the dim7',
+    dests: X => [3, 6, 9].flatMap(i => both(X.pc + i)),
+    ex(X, Y) {
+      const a = spell(X.l + 6, X.pc + 11) + 'dim7', b = spell(Y.l + 6, Y.pc + 11) + 'dim7';
+      return { chords: [`${a} = ${b}`, I(Y)], note: `Same four notes. As ${a} it leads to ${I(X)}; as ${b} it leads to ${I(Y)}.` };
+    }
+  },
+  aug: {
+    name: 'Augmented pivot', tier: 'adv',
+    hint: () => 'Respell the augmented 5',
+    dests: X => [4, 8].flatMap(i => both(X.pc + i)),
+    ex(X, Y) {
+      const a = spell(X.l + 4, X.pc + 7) + '+', b = spell(Y.l + 4, Y.pc + 7) + '+';
+      return { chords: [`${a} = ${b}`, I(Y)], note: `Same three notes. ${a} leans to ${I(X)}; ${b} leans to ${I(Y)}.` };
+    }
+  },
+  aug6: {
+    name: 'Augmented 6th', tier: 'adv',
+    hint: (X, Y) => mod(Y.pc - X.pc) === 11 ? 'Old 5 heard as an augmented 6th' : 'Old augmented 6th heard as the new 5',
+    dests: X => [...both(X.pc - 1), ...both(X.pc + 1)],
+    ex(X, Y) {
+      if (mod(Y.pc - X.pc) === 11) {
+        return { chords: [V7(X), V(Y), I(Y)], note: `${V7(X)} is the 5 in ${ks(X)}. Heard as the German 6th in ${ks(Y)}, it opens out to ${V(Y)}.` };
+      }
+      const cx = spell(X.l + 5, X.pc + 8) + '7';
+      return { chords: [V7(Y), I(Y)], note: `${cx} is the German 6th in ${ks(X)} and also the 5 of ${ks(Y)}.` };
+    }
+  },
+  neapolitan: {
+    name: 'Neapolitan pivot', tier: 'adv',
+    hint: () => 'The ♭2 is the door',
+    dests: X => [key(X.pc + 8, 'maj'), key(X.pc + 5, 'min'), key(X.pc + 6, 'maj')],
+    ex(X, Y) {
+      const nx = spell(X.l + 1, X.pc + 1), d = mod(Y.pc - X.pc);
+      if (d === 6) return { chords: [V7(Y), I(Y)], note: `${nx}, the ♭2 (Neapolitan) in ${ks(X)}, is the 5 of ${ks(Y)}.` };
+      const n = d === 8 ? tri(Y.l + 3, Y.pc + 5, 'M') : tri(Y.l + 5, Y.pc + 8, 'M');
+      return { chords: [n, V7(Y), I(Y)], note: `${n} is the ♭2 (Neapolitan) in ${ks(X)} and the ${d === 8 ? '4' : '♭6'} in ${ks(Y)}.` };
+    }
   }
 };
 const TECH_ORDER = Object.keys(TECH);
 
+/* ---------- progression library ----------
+   cat: style. c: uses chromatic chords. s7: 'dia' = diatonic 7ths, 'dom' = dominant-7 blues colour. */
 const BANK = {
   maj: [
-    { c: ['1','5','6','4'], n: 'Axis loop' },
-    { c: ['6','4','1','5'], n: 'Axis from the 6' },
-    { c: ['1','6','4','5'], n: 'Doo-wop' },
-    { c: ['6','1','4','5'], n: '6-1-4-5' },
-    { c: ['6','4','5','1'], n: '6-4-5-1' },
-    { c: ['6','2','5','1'], n: 'Turnaround' },
-    { c: ['2','5','1'], n: '2-5-1' },
-    { c: ['3','6','2','5','1'], n: 'Circle run' },
-    { c: ['1','4','5','1'], n: 'Basic cadence' },
-    { c: ['1','4','1','5'], n: 'Back and forth' },
-    { c: ['4','5','3','6'], n: 'Royal road' },
-    { c: ['4','1','5','6'], n: 'From the 4' },
-    { c: ['1','4','6','5'], n: 'Lift to the 6' },
-    { c: ['1','5','6','3','4','1','4','5'], n: 'Canon walk' },
-    { c: ['4','5','6'], n: 'Climb to the 6' },
-    { c: ['1','2','3','4'], n: 'Step up' },
-    { c: ['6','5','4','3'], n: 'Step down from the 6' },
-    { c: ['4','3','2','1'], n: 'Step down home' },
-    { c: ['1','b7','4','1'], n: '♭7 move', color: 1 },
-    { c: ['1','4','4m','1'], n: 'Minor 4 turn', color: 1 },
-    { c: ['1','b6','b7','1'], n: '♭6–♭7 lift', color: 1 },
-    { c: ['1','b3','4','1'], n: '♭3 rock move', color: 1 },
-    { c: ['4m','b7','1'], n: 'Backdoor cadence', color: 1 },
-    { c: ['1','5/6','6','4'], n: 'Secondary into the 6', color: 1 },
-    { c: ['1','5/2','2','5'], n: 'Secondary into the 2', color: 1 },
-    { c: ['1','5/5','5','1'], n: 'Secondary into the 5', color: 1 },
-    { c: ['1','5/6','4','4m'], n: 'Bright-to-dark turn', color: 1 },
-    { c: ['5/6','5/2','5/5','5','1'], n: 'Dominant chain', color: 1 }
+    { c: ['1','5','6','4'], n: 'Axis loop', cat: 'Pop' },
+    { c: ['6','4','1','5'], n: 'Axis from the 6', cat: 'Pop' },
+    { c: ['4','1','5','6'], n: 'Axis from the 4', cat: 'Pop' },
+    { c: ['1','6','4','5'], n: 'Doo-wop', cat: 'Pop' },
+    { c: ['6','1','4','5'], n: 'Minor-feel pop', cat: 'Pop' },
+    { c: ['1','4','6','5'], n: 'Lift to the 6', cat: 'Pop' },
+    { c: ['2','4','1','5'], n: 'Pop from the 2', cat: 'Pop' },
+    { c: ['1','3','4','5'], n: 'Climb through the 3', cat: 'Pop' },
+    { c: ['1','4','2','5'], n: 'Pop 2–5 loop', cat: 'Pop' },
+    { c: ['4','5','3','6'], n: 'Royal road', cat: 'Pop' },
+    { c: ['6','5','4','5'], n: 'Rocking on the 6', cat: 'Pop' },
+    { c: ['6','4','1','b7'], n: 'Axis with a ♭7', cat: 'Pop', x: 1 },
+    { c: ['1','5/6','6','4'], n: 'Secondary into the 6', cat: 'Pop', x: 1 },
+
+    { c: ['1','4','5','4'], n: 'Garage loop', cat: 'Rock' },
+    { c: ['1','5','4','1'], n: 'Rock turn', cat: 'Rock' },
+    { c: ['1','b7','4','1'], n: '♭7 move', cat: 'Rock', x: 1 },
+    { c: ['1','b3','4','1'], n: '♭3 rock move', cat: 'Rock', x: 1 },
+    { c: ['1','b6','b7','1'], n: '♭6–♭7 lift', cat: 'Rock', x: 1 },
+    { c: ['1','5','b7','4'], n: 'Mixolydian loop', cat: 'Rock', x: 1 },
+    { c: ['1','b3','b7','4'], n: 'Borrowed riff', cat: 'Rock', x: 1 },
+
+    { c: ['1','4','5','1'], n: 'Basic cadence', cat: 'Folk' },
+    { c: ['1','4','1','5'], n: 'Back and forth', cat: 'Folk' },
+    { c: ['4','1','4','5'], n: 'Campfire from the 4', cat: 'Folk' },
+    { c: ['1','6','2','5'], n: 'Old-time turnaround', cat: 'Folk' },
+    { c: ['1','2.M','4','1'], n: 'Major 2 lift', cat: 'Folk', x: 1 },
+
+    { c: ['1','5_7','6','1_5','4','1_3','2','5'], n: 'Descending bass', cat: 'Ballad' },
+    { c: ['1','5_7','6','4'], n: 'Walk-down to the 6', cat: 'Ballad' },
+    { c: ['1','1_7','6','6_5','4'], n: 'Bass line cliché', cat: 'Ballad' },
+    { c: ['6','6_5','4','5'], n: 'Minor walk on the 6', cat: 'Ballad' },
+    { c: ['4','1_3','2','1'], n: 'Step down home', cat: 'Ballad' },
+    { c: ['6','5','4','3'], n: 'Walk down from the 6', cat: 'Ballad' },
+    { c: ['1','2','3','4'], n: 'Step up', cat: 'Ballad' },
+    { c: ['4','5','6'], n: 'Climb to the 6', cat: 'Ballad' },
+    { c: ['1','5_7','b7','4_6'], n: '♭7 walk-down', cat: 'Ballad', x: 1 },
+
+    { c: ['2','5','1'], n: '2–5–1', cat: 'Jazz', s7: 'dia' },
+    { c: ['3','6','2','5','1'], n: 'Circle run', cat: 'Jazz', s7: 'dia' },
+    { c: ['1','6','2','5'], n: 'Rhythm turnaround', cat: 'Jazz', s7: 'dia' },
+    { c: ['1','6','2','5','3','6','2','5'], n: 'Long turnaround', cat: 'Jazz', s7: 'dia' },
+    { c: ['1','2','3','4'], n: 'Diatonic 7ths climb', cat: 'Jazz', s7: 'dia' },
+    { c: ['1','5/2','2','5'], n: 'Turnaround with a secondary', cat: 'Jazz', s7: 'dia', x: 1 },
+    { c: ['3','5/2','2','5'], n: 'Back-cycling', cat: 'Jazz', s7: 'dia', x: 1 },
+    { c: ['2','b2.7','1'], n: 'Tritone-sub 2–5–1', cat: 'Jazz', s7: 'dia', x: 1 },
+    { c: ['1','#1.dim7','2','5'], n: 'Passing diminished', cat: 'Jazz', s7: 'dia', x: 1 },
+    { c: ['3','b3.dim7','2','5'], n: 'Chromatic dim descent', cat: 'Jazz', s7: 'dia', x: 1 },
+    { c: ['5/6','5/2','5/5','5','1'], n: 'Dominant chain', cat: 'Jazz', x: 1 },
+
+    { c: ['1','1','1','1','4','4','1','1','5','4','1','5'], n: '12-bar blues', cat: 'Blues', s7: 'dom', x: 1 },
+    { c: ['1','4','1','1','4','4','1','1','5','4','1','5'], n: '12-bar quick change', cat: 'Blues', s7: 'dom', x: 1 },
+    { c: ['1','5','4','4','1','5','1','5'], n: '8-bar blues', cat: 'Blues', s7: 'dom', x: 1 },
+    { c: ['1','4','1','5'], n: 'Blues loop', cat: 'Blues', s7: 'dom', x: 1 },
+
+    { c: ['4','3','2','1'], n: 'Neo-soul walk-down', cat: 'Soul', s7: 'dia' },
+    { c: ['2','1_3','4','5'], n: 'Soul lift', cat: 'Soul', s7: 'dia' },
+    { c: ['6','2','5','1'], n: '6–2–5–1', cat: 'Soul', s7: 'dia' },
+    { c: ['1','4_1','1','4_1'], n: '4 over a 1 pedal', cat: 'Soul' },
+    { c: ['4','#4.dim7','1_5','6'], n: 'Gospel climb', cat: 'Soul', x: 1 },
+    { c: ['1','1_3','4','#4.dim7','1_5','5/2','2','5'], n: 'Gospel walk-up', cat: 'Soul', x: 1 },
+    { c: ['4','4.m','3','6'], n: 'Minor 4 into the 3', cat: 'Soul', s7: 'dia', x: 1 },
+    { c: ['1','5/5','5','1'], n: 'Secondary into the 5', cat: 'Soul', x: 1 },
+    { c: ['1','5/2','2','5'], n: 'Secondary into the 2', cat: 'Soul', x: 1 },
+
+    { c: ['1.sus','1','4','5.sus','5'], n: 'Sus lean', cat: 'Sus' },
+    { c: ['1','4.sus2','6','5.sus'], n: 'Sus2 float', cat: 'Sus' },
+    { c: ['1.sus2','4.sus2','6','5.sus'], n: 'Open sus loop', cat: 'Sus' },
+    { c: ['2','5.7sus','5.7','1'], n: '7sus resolve', cat: 'Sus' },
+    { c: ['1','5.sus','6','4'], n: 'Axis with a sus 5', cat: 'Sus' },
+    { c: ['4.sus2','1_3','5.sus','5'], n: 'Sus walk-up', cat: 'Sus' },
+    { c: ['1.add9','5','6','4.add9'], n: 'Add9 axis', cat: 'Sus' },
+
+    { c: ['1','4','4.m','1'], n: 'Minor 4 turn', cat: 'Colour', x: 1 },
+    { c: ['4.m','b7.7','1'], n: 'Backdoor cadence', cat: 'Colour', x: 1 },
+    { c: ['1','3.M','4','4.m'], n: 'Major 3 to minor 4', cat: 'Colour', x: 1 },
+    { c: ['1','1.7','4','4.m'], n: 'Dominant 1 into minor 4', cat: 'Colour', x: 1 },
+    { c: ['1','1.aug','1.6','1.7','4'], n: 'Augmented climb', cat: 'Colour', x: 1 },
+    { c: ['1','4','5.aug','1'], n: 'Augmented 5 lean', cat: 'Colour', x: 1 },
+    { c: ['1','6','b6','5'], n: 'Chromatic drop', cat: 'Colour', x: 1 },
+    { c: ['1','b6','4.m','1'], n: 'Dark plagal', cat: 'Colour', x: 1 },
+    { c: ['1','5/6','4','4.m'], n: 'Bright-to-dark turn', cat: 'Colour', x: 1 },
+
+    { c: ['1','5','6','3','4','1','4','5'], n: 'Canon walk', cat: 'Classic' },
+    { c: ['1','4','1_5','5','1'], n: 'Cadential 6/4', cat: 'Classic' },
+    { c: ['1','2_4','5','1'], n: '2 to 5 cadence', cat: 'Classic' },
+    { c: ['1','4','7','3','6','2','5','1'], n: 'Diatonic circle', cat: 'Classic' }
   ],
   min: [
-    { c: ['1','b6','b3','b7'], n: 'Minor axis' },
-    { c: ['1','b7','b6','5'], n: 'Walk-down to the 5' },
-    { c: ['1','4','5','1'], n: 'Minor cadence' },
-    { c: ['1','b6','b7','1'], n: '♭6–♭7 rise' },
-    { c: ['2','5','1'], n: 'Minor 2-5-1' },
-    { c: ['1','b3','b7','4'], n: 'Minor loop' },
-    { c: ['1','b7','b6','b7'], n: '♭7 rock' },
-    { c: ['1','4','b7','b3','b6','2','5','1'], n: 'Minor circle' },
-    { c: ['1','b6','4','5'], n: 'Dark pull' },
-    { c: ['1','5m','4','1'], n: 'Soft minor 5' },
-    { c: ['b6','b7','1'], n: '♭6–♭7–1' },
-    { c: ['1','4M','1','4M'], n: 'Major 4 in minor', color: 1 },
-    { c: ['1','b7','4M','1'], n: 'Major 4 rock', color: 1 },
-    { c: ['4','5','1M'], n: 'Major-1 finish', color: 1 },
-    { c: ['1','b2','b7','1'], n: '♭2 in minor', color: 1 }
+    { c: ['1','b6','b3','b7'], n: 'Minor axis', cat: 'Pop' },
+    { c: ['1','b3','b7','4'], n: 'Minor loop', cat: 'Pop' },
+    { c: ['1','b6','4','5'], n: 'Dark pull', cat: 'Pop' },
+    { c: ['1','4','b7','b3'], n: 'Minor to relative', cat: 'Pop' },
+    { c: ['1','b6','b3','5'], n: 'Epic minor', cat: 'Pop' },
+    { c: ['b6','b7','1','1'], n: '♭6–♭7–1', cat: 'Pop' },
+
+    { c: ['1','b6','b7','1'], n: '♭6–♭7 rise', cat: 'Rock' },
+    { c: ['1','b7','b6','b7'], n: '♭7 rock', cat: 'Rock' },
+    { c: ['1','b3','4','b6'], n: 'Minor climb', cat: 'Rock' },
+    { c: ['1','b7','4.M','1'], n: 'Major 4 rock', cat: 'Rock', x: 1 },
+    { c: ['1','b2','b7','1'], n: '♭2 in minor', cat: 'Rock', x: 1 },
+
+    { c: ['1','5.m','4','1'], n: 'Soft minor 5', cat: 'Folk' },
+    { c: ['1','b7','1','5.m'], n: 'Modal folk loop', cat: 'Folk' },
+    { c: ['1','4.M','1','4.M'], n: 'Major 4 in minor', cat: 'Folk', x: 1 },
+
+    { c: ['1','1_b7','b6','5'], n: 'Bass walk to the 5', cat: 'Ballad' },
+    { c: ['1','4','b6','5'], n: 'Minor ballad', cat: 'Ballad' },
+    { c: ['1','1.mM7','1.m7','1.m6'], n: 'Minor line cliché', cat: 'Ballad', x: 1 },
+    { c: ['1','1_b7','4.M_6','b6'], n: 'Minor walk-down', cat: 'Ballad', x: 1 },
+
+    { c: ['2','5','1'], n: 'Minor 2–5–1', cat: 'Jazz', s7: 'dia' },
+    { c: ['1','4','b7','b3','b6','2','5','1'], n: 'Minor circle', cat: 'Jazz', s7: 'dia' },
+    { c: ['4','b7','b3','b6'], n: 'Circle fragment', cat: 'Jazz', s7: 'dia' },
+    { c: ['1','b6','2','5'], n: 'Minor turnaround', cat: 'Jazz', s7: 'dia' },
+
+    { c: ['1','1','1','1','4','4','1','1','b6','5','1','5'], n: 'Minor 12-bar blues', cat: 'Blues', s7: 'dom', x: 1 },
+    { c: ['1','4','1','5'], n: 'Minor blues loop', cat: 'Blues', s7: 'dom', x: 1 },
+
+    { c: ['4','b7','b3','b3'], n: 'Soul move to the ♭3', cat: 'Soul', s7: 'dia' },
+    { c: ['1','4','1','4'], n: 'Minor vamp', cat: 'Soul', s7: 'dia' },
+
+    { c: ['1','b7','b6','5.sus','5'], n: 'Andalusian with a sus', cat: 'Sus' },
+    { c: ['1.sus2','b6','b3','b7'], n: 'Sus2 minor axis', cat: 'Sus' },
+    { c: ['1','4','5.sus','5'], n: 'Minor sus cadence', cat: 'Sus' },
+
+    { c: ['1','5.aug','b3_5','4'], n: 'Augmented 5 colour', cat: 'Colour', x: 1 },
+    { c: ['4','5','1.M'], n: 'Major-1 finish', cat: 'Colour', x: 1 },
+    { c: ['1','b6','b2','5'], n: 'Neapolitan cadence', cat: 'Colour', x: 1 },
+
+    { c: ['1','b7','b6','5'], n: 'Andalusian cadence', cat: 'Classic' },
+    { c: ['1','4','5','1'], n: 'Minor cadence', cat: 'Classic' },
+    { c: ['b6','5','1'], n: '♭6 to 5 resolve', cat: 'Classic' }
   ]
 };
+const CATS = ['Pop', 'Rock', 'Folk', 'Ballad', 'Jazz', 'Blues', 'Soul', 'Sus', 'Colour', 'Classic'];
 
 /* ---------- settings ---------- */
-const DEF = { minor: true, color: true, names: false };
+const DEF = { minor: true, color: true, adv: true, names: false, examples: false, off: [] };
 const STORE = 'keychain.v2';
-let S = (() => { try { return Object.assign({}, DEF, JSON.parse(localStorage.getItem(STORE) || '{}')); } catch (e) { return Object.assign({}, DEF); } })();
+let S = (() => {
+  try {
+    const j = Object.assign({}, DEF, JSON.parse(localStorage.getItem(STORE) || '{}'));
+    if (!Array.isArray(j.off)) j.off = [];
+    return j;
+  } catch (e) { return JSON.parse(JSON.stringify(DEF)); }
+})();
 const saveS = () => { try { localStorage.setItem(STORE, JSON.stringify(S)); } catch (e) {} };
 const keyOK = Y => S.minor || Y.mode === 'maj';
 function techOK(t) {
-  const n = TECH[t].needs;
-  return !(n === 'minor' && !S.minor) && !(n === 'color' && !S.color);
+  const T = TECH[t];
+  if (T.needs === 'minor' && !S.minor) return false;
+  if (T.tier === 'color' && !S.color) return false;
+  if (T.tier === 'adv' && !S.adv) return false;
+  return true;
 }
 
 function pickProg(K, avoid) {
-  const bank = BANK[K.mode].filter(p => S.color || !p.color);
+  let bank = BANK[K.mode].filter(p => S.color || !p.x);
+  const styled = bank.filter(p => !S.off.includes(p.cat));
+  if (styled.length) bank = styled;
   const b2 = bank.filter(p => p !== avoid);
   return pick(b2.length ? b2 : bank);
 }
@@ -443,20 +761,21 @@ function genOptions(X, prev) {
   const out = [], used = new Set();
   for (const t of shuffle(TECH_ORDER.filter(techOK))) {
     if (out.length >= 3) break;
-    let ds = TECH[t].dests(X).filter(Y => Y.id !== X.id && keyOK(Y) && !used.has(Y.id) && TECH[t].ok(X, Y));
+    const T = TECH[t];
+    let ds = T.dests(X).filter(Y => Y.id !== X.id && keyOK(Y) && !used.has(Y.id) && (!T.ok || T.ok(X, Y)));
     const fresh = ds.filter(Y => !prev || Y.id !== prev.id);
     if (fresh.length) ds = fresh;
     if (!ds.length) continue;
     const Y = pick(ds);
     used.add(Y.id);
-    out.push({ tech: t, to: Y, hint: TECH[t].hint(X, Y) });
+    out.push({ tech: t, to: Y, hint: T.hint(X, Y), ex: T.ex(X, Y) });
   }
   while (out.length < 3) {
     const ds = ALL_KEYS.filter(Y => Y.id !== X.id && keyOK(Y) && !used.has(Y.id));
     if (!ds.length) break;
     const Y = pick(ds);
     used.add(Y.id);
-    out.push({ tech: 'dominant', to: Y, hint: TECH.dominant.hint(X, Y) });
+    out.push({ tech: 'dominant', to: Y, hint: TECH.dominant.hint(X, Y), ex: TECH.dominant.ex(X, Y) });
   }
   return out;
 }
@@ -483,25 +802,36 @@ function takeOption(i) {
   if (!o) return;
   const Y = o.to, X = cur.key;
   const prog = TECH[o.tech].sameProg ? cur.prog : pickProg(Y, cur.prog);
-  commit({ key: Y, prog, opts: genOptions(Y, X), via: { from: X, tech: o.tech }, prev: X }, ['c-key', 'c-prog', 'opts']);
+  commit({ key: Y, prog, opts: genOptions(Y, X), via: { from: X, tech: o.tech, ex: o.ex }, prev: X }, ['c-key', 'c-prog', 'opts']);
 }
 function randomKey() { if (cur.opts.length) takeOption(Math.floor(Math.random() * cur.opts.length)); }
 function back() { if (!hist.length) return; cur = hist.pop(); render(['c-key', 'c-prog', 'opts']); }
+function toggleExamples(v) {
+  S.examples = typeof v === 'boolean' ? v : !S.examples;
+  saveS();
+  renderToggles();
+  render();
+}
 
 /* ---------- render ---------- */
+const exHTML = ex => `<div class="ex">${ex.chords.join('<span class="arr"> → </span>')}</div><div class="ex-note">${ex.note}</div>`;
 function render(flashIds) {
   $('key-name').textContent = cur.key.name;
   $('via').innerHTML = cur.via ? `from ${cur.via.from.name} · <b>${TECH[cur.via.tech].name}</b>` : 'Starting key';
+  $('via-ex').innerHTML = cur.via && S.examples ? exHTML(cur.via.ex) : '';
 
-  const n = cur.prog.c.length, cols = n > 4 ? 4 : n;
+  const p = cur.prog, n = p.c.length, cols = n > 4 ? 4 : n;
   $('prog').style.gridTemplateColumns = `repeat(${cols}, minmax(0, 1fr))`;
-  $('prog').innerHTML = cur.prog.c.map(code =>
-    `<div class="pchip"><b>${degHTML(code)}</b>${S.names ? `<i>${nm(cc(code, cur.key))}</i>` : ''}</div>`).join('');
-  $('prog-name').innerHTML = cur.prog.n + (cur.prog.color ? '<span class="tag">colour</span>' : '');
+  $('prog').innerHTML = p.c.map(code =>
+    `<div class="pchip">${degHTML(code)}${S.names ? `<i>${chordName(cc(code, cur.key), p.s7)}</i>` : ''}</div>`).join('');
+  const s7 = p.s7 === 'dia' ? ' · as 7th chords' : p.s7 === 'dom' ? ' · dominant 7ths' : '';
+  $('prog-name').innerHTML = `<b>${p.n}</b> · ${p.cat}${s7}`;
 
   $('opts').innerHTML = cur.opts.map((o, i) => `<button class="opt" data-opt="${i}">
       <span class="num">${i + 1}</span>
-      <span class="opt-main"><div class="opt-key">${o.to.name}</div><div class="opt-move"><b>${TECH[o.tech].name}</b> · ${o.hint}</div></span>
+      <span class="opt-main"><div class="opt-key">${o.to.name}</div>
+        <div class="opt-move"><b>${TECH[o.tech].name}</b> · ${o.hint}</div>
+        ${S.examples ? exHTML(o.ex) : ''}</span>
       <span class="chev">›</span></button>`).join('');
 
   $('back').disabled = !hist.length;
@@ -518,11 +848,17 @@ function sw(k, label, sub) {
   return `<div class="row" role="switch" tabindex="0" aria-checked="${!!S[k]}" data-sw="${k}">
     <div class="row-main"><div class="row-label">${label}</div><div class="row-sub">${sub}</div></div><span class="switch"></span></div>`;
 }
-function renderSettings() {
+function renderToggles() {
+  $('ex-toggle').innerHTML = sw('examples', 'Show examples', S.examples ? 'Chords for each move, worked out for these keys' : 'Off: you work out the bridge yourself');
   $('settings').innerHTML =
-    sw('minor', 'Minor keys', 'Relative and parallel switches') +
-    sw('color', 'Borrowed & secondary chords', '♭3 ♭6 ♭7, minor 4, 5/2 5/5 5/6') +
+    sw('minor', 'Minor keys', 'Minor keys plus relative and parallel switches') +
+    sw('color', 'Chromatic chords', 'Borrowed, secondary, passing and blues chords, plus the moves built on them') +
+    sw('adv', 'Advanced moves', 'Diminished, augmented, augmented 6th and Neapolitan pivots') +
     sw('names', 'Show chord names', 'Off: degrees only, you work out the chords');
+  $('styles').innerHTML = CATS.map(c => `<button class="chip${S.off.includes(c) ? '' : ' on'}" data-cat="${c}">${c}</button>`).join('');
+  $('styles-note').textContent = S.off.length
+    ? `Skipping ${S.off.join(', ')}. If nothing fits a key, all styles come back.`
+    : 'All styles on. Tap one to skip it.';
 }
 
 /* ---------- inputs ---------- */
@@ -530,32 +866,46 @@ $('next').addEventListener('click', nextProg);
 $('back').addEventListener('click', back);
 $('shuffle').addEventListener('click', reshuffle);
 $('opts').addEventListener('click', e => { const b = e.target.closest('[data-opt]'); if (b) takeOption(+b.dataset.opt); });
-$('settings').addEventListener('click', e => {
+function onSwitch(e) {
   const r = e.target.closest('[data-sw]');
   if (!r) return;
   const k = r.dataset.sw;
+  if (k === 'examples') { toggleExamples(); return; }
   S[k] = !S[k];
   saveS();
-  renderSettings();
+  renderToggles();
   if (k === 'names') { render(); return; }
   if (!keyOK(cur.key)) { cur = fresh(); hist.length = 0; render(); return; }
-  if (cur.prog.color && !S.color) cur = Object.assign({}, cur, { prog: pickProg(cur.key, null) });
+  if (cur.prog.x && !S.color) cur = Object.assign({}, cur, { prog: pickProg(cur.key, null) });
   cur = Object.assign({}, cur, { opts: genOptions(cur.key, cur.prev) });
   render();
-});
-$('settings').addEventListener('keydown', e => {
-  if ((e.key === 'Enter' || e.key === ' ') && e.target.matches('[role="switch"]')) { e.preventDefault(); e.stopPropagation(); e.target.click(); }
+}
+$('settings').addEventListener('click', onSwitch);
+$('ex-toggle').addEventListener('click', onSwitch);
+$('styles').addEventListener('click', e => {
+  const b = e.target.closest('[data-cat]');
+  if (!b) return;
+  const c = b.dataset.cat;
+  S.off = S.off.includes(c) ? S.off.filter(x => x !== c) : S.off.concat(c);
+  saveS();
+  renderToggles();
+  if (S.off.includes(cur.prog.cat)) { cur = Object.assign({}, cur, { prog: pickProg(cur.key, cur.prog) }); render(['c-prog']); }
 });
 document.addEventListener('keydown', e => {
   if (e.metaKey || e.ctrlKey || e.altKey) return;
-  if (e.target.matches && e.target.matches('[role="switch"]') && (e.key === ' ' || e.key === 'Enter')) return;
   const k = e.key;
+  if (e.target.matches && e.target.matches('[role="switch"]') && (k === ' ' || k === 'Enter')) {
+    e.preventDefault();
+    e.target.click();
+    return;
+  }
   let done = true;
   if (k === ' ' || k === 'ArrowRight' || k === 'ArrowDown' || k === 'PageDown' || k === 'n' || k === 'N') nextProg();
   else if (k === 'ArrowLeft' || k === 'ArrowUp' || k === 'PageUp' || k === 'Backspace' || k === 'b' || k === 'B') back();
   else if (k === '1' || k === '2' || k === '3') takeOption(+k - 1);
   else if (k === 'k' || k === 'K') randomKey();
   else if (k === 's' || k === 'S') reshuffle();
+  else if (k === 'e' || k === 'E') toggleExamples();
   else done = false;
   if (done) e.preventDefault();
 });
@@ -566,7 +916,7 @@ const framed = (() => { try { return window.self !== window.top; } catch (e) { r
 let rec = null, listening = false, sess = 0, fired = {}, wake = null, heardTimer = null;
 
 const NUMS = { one: 0, won: 0, '1': 0, two: 1, to: 1, too: 1, '2': 1, three: 2, tree: 2, free: 2, '3': 2 };
-const CMD = /\b(?:(back|undo|previous)|(?:option|number|pick|take|choose|go)\s+(one|won|1|two|to|too|2|three|tree|free|3)|((?:next|new|change|switch|another)\s+key|modulate)|(shuffle|new options|other options|more options|refresh)|(next(?:\s+(?:progression|prog|one|chords?|loop))?|skip|(?:new|another|change)\s+(?:progression|prog|chords?|loop)|progression))\b/g;
+const CMD = /\b(?:(back|undo|previous)|(?:option|number|pick|take|choose|go)\s+(one|won|1|two|to|too|2|three|tree|free|3)|((?:next|new|change|switch|another)\s+key|modulate)|(shuffle|new options|other options|more options|refresh)|(show\s+examples?|examples?\s+on)|(hide\s+examples?|examples?\s+off)|(next(?:\s+(?:progression|prog|one|chords?|loop))?|skip|(?:new|another|change)\s+(?:progression|prog|chords?|loop)|progression))\b/g;
 function parse(t) {
   const out = [];
   let m;
@@ -576,7 +926,9 @@ function parse(t) {
     else if (m[2]) out.push(['opt', NUMS[m[2]]]);
     else if (m[3]) out.push(['key']);
     else if (m[4]) out.push(['shuffle']);
-    else if (m[5]) out.push(['next']);
+    else if (m[5]) out.push(['ex', true]);
+    else if (m[6]) out.push(['ex', false]);
+    else if (m[7]) out.push(['next']);
   }
   return out;
 }
@@ -585,6 +937,7 @@ function run(c) {
   else if (c[0] === 'opt') takeOption(c[1]);
   else if (c[0] === 'key') randomKey();
   else if (c[0] === 'shuffle') reshuffle();
+  else if (c[0] === 'ex') toggleExamples(c[1]);
   else if (c[0] === 'next') nextProg();
 }
 function status(msg, warn) {
@@ -674,7 +1027,7 @@ $('mic').addEventListener('click', () => { if (listening) stopVoice(false); else
 
 /* ---------- go ---------- */
 cur = fresh();
-renderSettings();
+renderToggles();
 render();
 </script>
 </body>
